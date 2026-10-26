@@ -1,6 +1,6 @@
 {
   "name": "cercle-store",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "description": "Store Android gratuit avec catalogue signé sur GitHub Pages et APK dans Releases.",

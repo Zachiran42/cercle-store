@@ -1,4 +1,4 @@
-# Cercle 0.3.0 — édition GitHub gratuite
+# Cercle 0.3.1 — édition GitHub gratuite
 
 Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
 
@@ -10,8 +10,16 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
 - Catalogue : Lisière Compact 1.3.1 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
-- APK **0.3.0 de test**, versionCode 5, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- APK **0.3.1 de test**, versionCode 6, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Préparation de l’installation — version 0.3.1
+
+La barre à 100 % indique la fin du téléchargement. Cercle vérifie ensuite le fichier, prépare les données pour Android puis attend sa confirmation. Ces étapes sont maintenant affichées explicitement. La copie et la synchronisation des fichiers s’exécutent en arrière-plan ; un garde dans le code interdit leur exécution sur le fil de l’interface.
+
+La fenêtre de progression reste visible jusqu’au retour d’Android, et les demandes sont identifiées pour qu’un ancien résultat ne ferme pas la préparation d’une nouvelle installation. Le lancement de la confirmation tient compte des règles de PendingIntent d’Android 15/16. Les validations du fichier et la confirmation utilisateur sont conservées.
+
+Des durées de préparation et de réponse Android sont journalisées localement sous le tag CercleInstall pour le diagnostic, sans envoi automatique. Le temps propre à Android n’a pas été mesuré sur téléphone et aucun gain chiffré n’est annoncé.
 
 ## Ajouts personnels depuis GitHub
 
@@ -112,7 +120,7 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.0/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.1/Cercle.apk)
 
-Version actuelle : **0.3.0**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.3.1**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->

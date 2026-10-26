@@ -91,7 +91,7 @@ final class PersonalApps {
  static File download(Context c,JSONObject app,Packages.Progress progress)throws Exception{
   JSONObject saved=find(all(c),app.getString("packageName"));if(saved==null||!sameAsset(saved,app))throw new IOException("Cette fiche personnelle a changé. Actualisez le catalogue.");sameIdentity(saved,app);
   File file=fetch(c,saved,progress);JSONObject verified;
-  try{verified=inspect(c,saved,file);save(c,verified);}catch(Exception e){file.delete();throw e;}
+  try{progress.stage("Vérification de l’identité et du certificat…");verified=inspect(c,saved,file);save(c,verified);}catch(Exception e){file.delete();throw e;}
   // Keep the screen's object in sync before the installer reads its identity.
   app.put("release",verified.getJSONObject("release")).put("pendingCheck",false);
   PackageInfo installed=Packages.installed(c,verified.getString("packageName"));if(installed!=null&&Packages.version(installed)>=verified.getJSONObject("release").getLong("versionCode"))throw new IOException("Cette application est déjà à jour.");
