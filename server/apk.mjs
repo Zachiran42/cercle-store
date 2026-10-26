@@ -22,5 +22,5 @@ export async function inspectApk(file, tools) {
   if (!Number.isSafeInteger(versionCode) || versionCode < 1) throw Object.assign(new Error('Le numéro interne de version est invalide.'), { status: 400 });
   const hash = createHash('sha256'); let size = 0;
   for await (const chunk of createReadStream(file)) { hash.update(chunk); size += chunk.length; }
-  return { packageName: pkg[1], versionCode, versionName: pkg[3], name: (badging.match(/^application-label-fr:'(.*)'/m) || badging.match(/^application-label:'(.*)'/m) || [])[1] || pkg[1], minSdk: Number(badging.match(/^sdkVersion:'(\d+)'/m)?.[1] || 1), signers, sha256: hash.digest('hex'), size };
+  return { packageName: pkg[1], versionCode, versionName: pkg[3], name: (badging.match(/^application-label-fr:'(.*)'/m) || badging.match(/^application-label:'(.*)'/m) || [])[1] || pkg[1], minSdk: Number(badging.match(/^(?:sdkVersion|minSdkVersion):'(\d+)'/m)?.[1] || 1), signers, sha256: hash.digest('hex'), size };
 }

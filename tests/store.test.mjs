@@ -7,6 +7,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { createHash, createPublicKey, verify } from 'node:crypto';
 import { createStore } from '../server/main.mjs';
+import { inspectApk } from '../server/apk.mjs';
 const project = path.resolve(import.meta.dirname, '..');
 const toolFile = process.env.CERCLE_TOOLCHAIN || path.join(project, '.toolchain.json');
 const fixture = path.join(project,'build','cercle.apk');
@@ -14,6 +15,8 @@ const update = path.join(project,'build','cercle-update-test.apk');
 const wrongSigner = process.env.CERCLE_WRONG_SIGNER;
 const pass = 'Cercle-test-password-not-production';
 const origin = 'https://cercle.test';
+test('la version Android minimale est extraite du manifeste du véritable APK', async()=>{const tools=JSON.parse(fs.readFileSync(toolFile,'utf8').replace(/^\uFEFF/,''));const info=await inspectApk(fixture,tools);assert.equal(info.minSdk,26);});
+
 test('Publication et accès privé avec de vrais APK signés', async t => {
  const temporaryRoot = path.resolve(process.env.CERCLE_TEST_ROOT || os.tmpdir());
  const dir = fs.mkdtempSync(path.join(temporaryRoot,'cercle-tests-'));
