@@ -4,6 +4,12 @@ import {createHash, createPrivateKey, createPublicKey, sign} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {inspectApk} from './apk.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+export function updateReadmeDownload(root,release,version){
+ const file=path.join(root,'README.md');if(!fs.existsSync(file))return false;
+ const text=fs.readFileSync(file,'utf8').replace(/(?:\r?\n)*<!-- cercle-ddl:start -->[\s\S]*?<!-- cercle-ddl:end -->(?:\r?\n)*/g,'\n\n').trimEnd();
+ const footer='\n\n<!-- cercle-ddl:start -->\n## APK Android\n\n[📥 Télécharger la dernière version de Cercle.apk]('+release.url+')\n\nVersion actuelle : **'+version+'**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.\n<!-- cercle-ddl:end -->\n';
+ fs.writeFileSync(file,text+footer);return true;
+}
 export function readConfig(root){
  const config=JSON.parse(fs.readFileSync(path.join(root,'github-store.json'),'utf8').replace(/^\uFEFF/,''));
  if(!/^[A-Za-z0-9][A-Za-z0-9-]{0,38}\/[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(config.repository))throw new Error('Le dépôt GitHub est invalide.');
@@ -91,7 +97,8 @@ export async function publishGitHub({root,prepared,tools}){
   const checked=await api('repos/'+config.repository+'/releases/'+remote.id);if(checked.assets?.find(a=>a.name===release.fileName)?.digest!=='sha256:'+release.sha256)throw new Error('Le fichier envoyé ne correspond pas à l’APK local.');
   if(remote.draft)await api('repos/'+config.repository+'/releases/'+remote.id,'PATCH',{draft:false});
  }
- const commitSha=await commit([],'Publier le catalogue Cercle '+prepared.manifest.revision,true);
+ const readmeUpdated=updateReadmeDownload(root,prepared.manifest.releases.find(r=>r.isStore),config.storeVersion);
+ const commitSha=await commit(readmeUpdated?['README.md']:[],'Publier le catalogue Cercle '+prepared.manifest.revision,true);
  let site;try{site=await api('repos/'+config.repository+'/pages');if(site.build_type!=='legacy'||site.source?.branch!==branch||site.source?.path!=='/docs'){await api('repos/'+config.repository+'/pages','PUT',{build_type:'legacy',source:{branch,path:'/docs'}});site=await api('repos/'+config.repository+'/pages');}}catch(error){if(!/404|Not Found/.test(error.message))throw error;site=await api('repos/'+config.repository+'/pages','POST',{build_type:'legacy',source:{branch,path:'/docs'}});}
  return {repository:config.repository,url:site.html_url||config.pagesUrl,commitSha,revision:prepared.manifest.revision,status:'building',apps:prepared.manifest.apps};
 }
