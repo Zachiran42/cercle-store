@@ -1,0 +1,21 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {command} from '../server/github.mjs';
+const root=path.resolve(import.meta.dirname,'..');
+test('mise à jour de Cercle : seule sa fiche du catalogue partagé est acceptée',async()=>{
+ const tools=JSON.parse(fs.readFileSync(path.join(root,'.toolchain.json'),'utf8')),jar=path.join(root,'build/test-json.jar'),temp=fs.mkdtempSync(path.join(root,'build','self-update-test-'));
+ try{
+ const java=[
+ 'package fr.zachiran.cercle;import org.json.*;import java.io.*;',
+ 'public class SelfTest{static int checks;interface Task{void run()throws Exception;}static void ok(boolean v){checks++;if(!v)throw new AssertionError("Check "+checks);}static void reject(Task t)throws Exception{checks++;try{t.run();}catch(IOException expected){return;}throw new AssertionError("Expected refusal");}',
+ 'static JSONObject entry(String pkg,int version)throws Exception{return new JSONObject().put("packageName",pkg).put("name","Cercle").put("release",new JSONObject().put("packageName",pkg).put("versionCode",version).put("versionName","0.3."+version).put("size",50000L).put("sha256",new String(new char[64]).replace((char)0,\'a\')).put("signers",new JSONArray().put("certificate")).put("downloadUrl","https://github.com/Zachiran42/cercle-store/releases/download/store-v1/Cercle.apk"));}',
+ 'public static void main(String[] args)throws Exception{String own="fr.zachiran.cercle",repo="Zachiran42/cercle-store";JSONObject self=entry(own,7),other=entry("app.reader",999);JSONArray apps=new JSONArray().put(other).put(self);JSONObject chosen=SelfUpdate.find(apps,own,repo);ok(chosen.getString("packageName").equals(own));ok(chosen.getJSONObject("release").getLong("versionCode")==7);chosen.getJSONObject("release").put("versionCode",8);ok(self.getJSONObject("release").getLong("versionCode")==7);',
+ 'reject(()->SelfUpdate.find(new JSONArray().put(other),own,repo));reject(()->SelfUpdate.find(new JSONArray().put(self).put(self),own,repo));',
+ 'JSONObject personal=entry(own,8).put("personal",true);reject(()->SelfUpdate.find(new JSONArray().put(personal),own,repo));JSONObject pending=entry(own,8).put("pendingCheck",true);reject(()->SelfUpdate.find(new JSONArray().put(pending),own,repo));',
+ 'for(String field:new String[]{"packageName","sha256","versionCode","size","signers"}){JSONObject bad=entry(own,8),r=bad.getJSONObject("release");if(field.equals("packageName"))r.put(field,"evil.app");if(field.equals("sha256"))r.put(field,"not-a-hash");if(field.equals("versionCode"))r.put(field,0);if(field.equals("size"))r.put(field,201L*1024*1024);if(field.equals("signers"))r.put(field,new JSONArray());reject(()->SelfUpdate.find(new JSONArray().put(bad),own,repo));}',
+ 'for(String url:new String[]{"http://github.com/Zachiran42/cercle-store/releases/download/v1/Cercle.apk","https://github.com/other/repo/releases/download/v1/Cercle.apk","https://evil.test/a.apk","https://github.com/Zachiran42/cercle-store/releases/download/v1/Cercle.apk?token=bad","https://github.com/Zachiran42/cercle-store/releases/download/../Cercle.apk"}){JSONObject bad=entry(own,8);bad.getJSONObject("release").put("downloadUrl",url);reject(()->SelfUpdate.find(new JSONArray().put(bad),own,repo));}',
+ 'ok(SelfUpdate.find(new JSONArray().put(self),own,repo).getJSONObject("release").getLong("versionCode")==7);System.out.println("Self update source checks OK: "+checks);}}'
+ ].join('\n');
+ const file=path.join(temp,'SelfTest.java'),classes=path.join(temp,'classes');fs.writeFileSync(file,java);fs.mkdirSync(classes);const bin=path.join(tools.javaHome,'bin');
+ await command(path.join(bin,'javac.exe'),['-encoding','UTF-8','-source','8','-target','8','-cp',jar,'-d',classes,file,path.join(root,'android/src/fr/zachiran/cercle/SelfUpdate.java'),path.join(root,'android/src/fr/zachiran/cercle/DownloadPolicy.java')]);
+ const output=await command(path.join(bin,'java.exe'),['-cp',classes+path.delimiter+jar,'fr.zachiran.cercle.SelfTest']);assert.match(output,/Self update source checks OK: 18/);
+ }finally{assert.equal(path.dirname(path.resolve(temp)),path.join(root,'build'));assert.ok(path.basename(temp).startsWith('self-update-test-'));fs.rmSync(temp,{recursive:true,force:true});}
+});

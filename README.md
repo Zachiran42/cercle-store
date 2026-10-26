@@ -1,4 +1,4 @@
-# Cercle 0.3.1 — édition GitHub gratuite
+# Cercle 0.3.2 — édition GitHub gratuite
 
 Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
 
@@ -9,9 +9,22 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue : Lisière Compact 1.3.1 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
-- APK **0.3.1 de test**, versionCode 6, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- Catalogue : Lisière Compact 1.4.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- APK **0.3.2 de test**, versionCode 7, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Mise à jour de Cercle — version 0.3.2
+
+Un encart **Mise à jour de Cercle** reste visible dans **Mon Cercle** et **Mises à jour**, même quand aucune version plus récente n’est disponible. Il montre la version réellement installée et la dernière version connue ; le bouton permet de vérifier spécifiquement Cercle puis de confirmer sa mise à jour si nécessaire. Cet accès fonctionne aussi depuis le mode Aperçu.
+
+La vérification recharge le catalogue signé avec une requête destinée à éviter un ancien cache HTTP. Elle ne dépend pas de la fin des vérifications des dépôts personnels. Une erreur réseau ou une fiche absente est signalée comme une vérification impossible, sans prétendre que Cercle est à jour. Le certificat doit correspondre à celui du store installé.
+
+### Comment les mises à jour des applications sont détectées
+
+- **Catalogue partagé, dont Lisière** : le propriétaire ajoute le nouvel APK signé dans l’administration puis republie le catalogue. Un tag ou une release dans le dépôt d’origine ne met pas le catalogue partagé à jour automatiquement. Cercle compare le versionCode publié dans ce catalogue à celui installé sur le téléphone.
+- **Mes ajouts personnels** : Cercle interroge directement GitHub Releases pour le dépôt choisi par l’utilisateur. Une nouvelle publication est signalée, puis l’APK est vérifié à la demande avant installation.
+
+La version 1.4.0 de Lisière a été synchronisée dans cette livraison : versionCode 6, même identifiant et certificat que la 1.3.1, recherche Gutenberg et import multiple.
 
 ## Préparation de l’installation — version 0.3.1
 
@@ -25,7 +38,7 @@ Des durées de préparation et de réponse Android sont journalisées localement
 
 Sur chaque téléphone :
 
-1. Ouvrir Cercle puis **Ajouter depuis GitHub** dans Découvrir ou Mon Cercle.
+1. Ouvrir Cercle puis **Ajouter depuis GitHub** dans Découvrir.
 2. Coller le lien d’un dépôt GitHub public et rechercher sa publication. Le dépôt doit proposer un APK dans GitHub Releases : Cercle ne compile pas de code et n’installe pas les fichiers AAB/ZIP.
 3. Choisir le fichier APK si plusieurs variantes existent. Cercle le télécharge pour vérifier son identité et affiche un aperçu.
 4. Confirmer **Ajouter** ou **Ajouter et installer**. Les applications personnelles apparaissent dans **Mes ajouts** sur ce téléphone.
@@ -120,7 +133,7 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.1/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.2/Cercle.apk)
 
-Version actuelle : **0.3.1**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.3.2**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->
