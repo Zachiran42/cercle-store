@@ -53,7 +53,7 @@ export async function preparePublication({root,dataDir,db,tools}){
  const envelope={payload:payload.toString('base64'),signature:sign('sha256',payload,key).toString('base64')};
  fs.writeFileSync(path.join(pages,'catalog.json'),JSON.stringify(envelope));
  fs.writeFileSync(path.join(pages,'store.json'),JSON.stringify({name:'Cercle',repository:config.repository,apkUrl:releases.find(r=>r.isStore).url,catalogUrl:config.pagesUrl+'catalog.json',publicKey:config.publicKey}));
- for(const [source,name] of [['github.html','index.html'],['github.js','catalog.js'],['styles.css','styles.css'],['mark.svg','mark.svg']])fs.copyFileSync(path.join(root,'public',source),path.join(pages,name));
+ for(const [source,name] of [['github.html','index.html'],['github.js','catalog.js'],['styles.css','styles.css'],['mark.svg','mark.svg']]){const origin=path.join(root,'public',source),destination=path.join(pages,name);if(name==='index.html'){const html=fs.readFileSync(origin,'utf8').replace('./styles.css','./styles.css?v='+revision).replace('./catalog.js','./catalog.js?v='+revision);fs.writeFileSync(destination,html);}else fs.copyFileSync(origin,destination);}
  fs.writeFileSync(path.join(pages,'.nojekyll'),'');
  const manifest={repository:config.repository,pagesUrl:config.pagesUrl,revision,apps:apps.length-1,releases,preparedAt:Date.now()};
  fs.writeFileSync(path.join(output,'publication.json'),JSON.stringify(manifest,null,2));
