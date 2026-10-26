@@ -1,10 +1,15 @@
-# Vérification de Cercle 0.2.1 — 26 octobre 2026
+# Vérification de Cercle 0.3.0 — 26 octobre 2026
 
-- Version Android 0.2.1, versionCode 4, minimum Android 8 (API 26).
-- Relecture de la version installée au retour sur la fiche, à réception des événements Android d’installation/remplacement/désinstallation pendant que Cercle est visible, et lors de l’actualisation du catalogue. Aucun état « installé » n’est déduit du téléchargement : Android reste la source de vérité.
-- Contrôle de version avant le téléchargement et nouvelle vérification après réception de l’APK.
-- Ouverture directe des applications installées depuis leurs cartes, avec gestion d’une désinstallation ou d’un refus Android entre l’affichage et le clic. Ouverture aussi proposée dans la fiche d’une application dont une mise à jour est disponible.
-- 30 tests réussis : publication des APK, versions égales/anciennes/supérieures, changement de certificat refusé, signatures du catalogue, règles de téléchargement Java, publication GitHub simulée.
-- Parmi ces tests, exécution du code Java réel de téléchargement, avec services Android simulés : ancienne version, même version, version plus récente installée, application absente et numéros de version sur 64 bits. Les versions déjà installées ne provoquent aucun accès réseau ; un téléchargement ne change pas l’état installé.
-- Catalogue : Lisière Compact 1.3.1 (API 24), code original sous licence MIT ; APK original avec notices tierces.
-- Limite : pas de téléphone ni d’émulateur Android connecté ici. Le retour réel de la confirmation d’installation, le rendu natif et le lancement de Lisière restent à vérifier sur téléphone.
+- Version Android 0.3.0, versionCode 5, minimum Android 8 (API 26).
+- Ajout personnel depuis un dépôt GitHub public : recherche d’une publication stable, ou d’une préversion si aucune version stable n’est disponible ; choix du fichier APK si nécessaire ; téléchargement pour inspection ; aperçu puis confirmation explicite de l’ajout.
+- Les fiches sont enregistrées dans les préférences privées de Cercle sur ce téléphone, séparément du catalogue partagé. Aucun ajout personnel n’est envoyé au serveur d’administration, au catalogue Pages ou au dépôt du propriétaire du store.
+- Les demandes réseau de recherche et de téléchargement sont envoyées à GitHub, sans jeton ni connexion GitHub. GitHub reçoit nécessairement les requêtes des dépôts consultés.
+- Les APK sont limités à 200 Mo. Contrôle du dépôt, des URL HTTPS, de la taille et de l’empreinte publiée par GitHub lorsqu’elle est disponible ; après inspection initiale, l’empreinte du fichier est conservée localement. Les certificats et l’identifiant du paquet sont conservés et comparés lors des mises à jour. Android effectue la validation finale de l’installation.
+- Une source personnelle ne peut pas remplacer le paquet de Cercle ; ses mises à jour continuent à provenir du catalogue signé. Le contrôle strict des téléchargements du catalogue partagé reste inchangé.
+- Le suivi des ajouts personnels consulte uniquement les métadonnées des publications. Les APK des nouvelles publications sont téléchargés quand l’utilisateur demande leur vérification/installation ; les comparaisons de version reposent alors sur le contenu réel de l’APK.
+- Si plusieurs variantes APK existent, le suivi conserve la famille de nom sélectionnée. Une sélection ambiguë ne bascule pas silencieusement vers une autre variante ; l’utilisateur peut rechercher et sélectionner une publication depuis la fiche.
+- Le retrait d’une fiche personnelle arrête son suivi sans désinstaller l’application.
+- 31 tests automatisés : serveur, catalogue signé, publication GitHub simulée et code Java. Le test des ajouts personnels exécute plus de 50 contrôles avec services Android et réponses GitHub simulés : isolation entre utilisateurs, confirmation avant sauvegarde, persistance, fusion sans écrasement du catalogue partagé, cache, empreinte incorrecte, changement de paquet/certificat, APK fractionné, blocage d’une autre source pour Cercle, nouvelles publications, variantes, limitations GitHub, suppression et fiches périmées.
+- Dépendance JSON de test téléchargée depuis Maven Central et vérifiée par SHA-256 ; elle est utilisée uniquement sur JVM pour les tests, jamais embarquée dans l’APK.
+- Signature APK v2/v3, certificat de mise à jour et clé publique de catalogue contrôlés lors de la compilation/publication.
+- Limite : aucun téléphone ni émulateur Android connecté ici. Le rendu natif, le sélecteur d’APK, les confirmations d’installation et l’ouverture des applications restent à confirmer sur téléphone.
