@@ -6,9 +6,9 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 
 ## État de cette livraison
 
-- Dépôt prévu : **Zachiran42/cercle-store**.
-- Adresse prévue après publication : **https://zachiran42.github.io/cercle-store/**.
-- Ces adresses ne prouvent pas qu'une publication a été effectuée. Le rapport VALIDATION.md précise l'état vérifié.
+- Dépôt public : **Zachiran42/cercle-store**.
+- Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
+- Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
 - Catalogue initial : aucune application personnelle, puisque les APK de l'utilisateur sont encore en local. L'APK du store est inclus pour son installation et ses futures mises à jour.
 - APK **0.2.0 de test**, versionCode 3, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
