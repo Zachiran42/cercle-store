@@ -87,3 +87,11 @@ Cette édition utilise un client natif dédié et un catalogue signé spécifiqu
 Pas encore de test sur téléphone/émulateur, d'APK fractionnés, de rotation de certificats, de gestion multi-administrateurs ni de publication automatique lors d'un push de chaque projet. Vous pouvez cependant ajouter vos applications progressivement depuis leurs fichiers locaux. Les exigences Android de distribution hors Google Play restent applicables.
 
 Code du store sous licence MIT. Chaque application conserve sa propre licence.
+
+<!-- cercle-ddl:start -->
+## APK Android
+
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.2.0/Cercle.apk)
+
+Version actuelle : **0.2.0**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+<!-- cercle-ddl:end -->
