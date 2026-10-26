@@ -8,4 +8,7 @@
 - Catalogue public vérifié dans le navigateur, y compris sa signature ECDSA avec WebCrypto.
 - Aucun APK personnel n'a été fourni : catalogue personnel vide.
 - À valider sur téléphone : installation, confirmations système, notification, rendu natif et mise à jour d'une application existante sans perte de données.
-- Mise en ligne réelle en attente de la connexion GitHub CLI. Aucune URL publique n'est annoncée comme publiée à ce stade.
+- Publication réelle effectuée sur https://zachiran42.github.io/cercle-store/ et dépôt public https://github.com/Zachiran42/cercle-store. GitHub Pages indique built et HTTPS est imposé.
+
+- Téléchargement public sans authentification vérifié : APK de 37 414 octets, SHA-256 75c274d8c20980442631dd39719584949fa113f9ca6672a2f2753d5546af3b0a.
+- Signature du catalogue public vérifiée avec la clé intégrée à la configuration du client. Catalogue personnel encore vide.
