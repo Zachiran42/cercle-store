@@ -83,6 +83,7 @@ export async function publishGitHub({root,prepared,tools}){
   if(head)await api('repos/'+config.repository+'/git/refs/heads/'+encodeURIComponent(branch),'PATCH',{sha:result.sha,force:false});else await api('repos/'+config.repository+'/git/refs','POST',{ref:'refs/heads/'+branch,sha:result.sha});head={object:{sha:result.sha}};return result.sha;
  }
  if(!head){await api('repos/'+config.repository+'/contents/github-store.json','PUT',{message:'Initialiser Cercle pour GitHub Pages',content:fs.readFileSync(path.join(root,'github-store.json')).toString('base64'),branch});head=await api('repos/'+config.repository+'/git/ref/heads/'+encodeURIComponent(branch));}
+ await commit(sourceFiles(),'Publier les sources de Cercle avant ses versions',false);
  for(const release of prepared.manifest.releases){let remote;try{remote=await api('repos/'+config.repository+'/releases/tags/'+encodeURIComponent(release.tag));}catch(error){if(!/404|Not Found/.test(error.message))throw error;remote=await api('repos/'+config.repository+'/releases','POST',{tag_name:release.tag,target_commitish:head.object.sha,name:release.name,draft:true,prerelease:release.isStore,body:'APK signé publié depuis Cercle. SHA-256 : '+release.sha256});}
   const existing=remote.assets?.find(a=>a.name===release.fileName);
   if(existing){if(existing.digest!=='sha256:'+release.sha256)throw new Error('Un fichier différent existe déjà pour '+release.tag+'. Augmentez le numéro de version, sans remplacer l’ancien APK.');}
@@ -90,7 +91,7 @@ export async function publishGitHub({root,prepared,tools}){
   const checked=await api('repos/'+config.repository+'/releases/'+remote.id);if(checked.assets?.find(a=>a.name===release.fileName)?.digest!=='sha256:'+release.sha256)throw new Error('Le fichier envoyé ne correspond pas à l’APK local.');
   if(remote.draft)await api('repos/'+config.repository+'/releases/'+remote.id,'PATCH',{draft:false});
  }
- const commitSha=await commit(sourceFiles(),'Publier le catalogue Cercle '+prepared.manifest.revision,true);
+ const commitSha=await commit([],'Publier le catalogue Cercle '+prepared.manifest.revision,true);
  let site;try{site=await api('repos/'+config.repository+'/pages');if(site.build_type!=='legacy'||site.source?.branch!==branch||site.source?.path!=='/docs'){await api('repos/'+config.repository+'/pages','PUT',{build_type:'legacy',source:{branch,path:'/docs'}});site=await api('repos/'+config.repository+'/pages');}}catch(error){if(!/404|Not Found/.test(error.message))throw error;site=await api('repos/'+config.repository+'/pages','POST',{build_type:'legacy',source:{branch,path:'/docs'}});}
  return {repository:config.repository,url:site.html_url||config.pagesUrl,commitSha,revision:prepared.manifest.revision,status:'building',apps:prepared.manifest.apps};
 }
