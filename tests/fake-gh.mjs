@@ -14,7 +14,7 @@ if(suffix.startsWith('contents/github-store.json')){if(method==='PUT'){s.marker=
 if(suffix==='git/blobs'){const sha=hash();s.blobs[sha]=body.content;output({sha});}
 if(suffix.startsWith('git/commits/'))output({tree:{sha:'base-tree'}});
 if(suffix==='git/trees'){s.lastTree=body.tree;output({sha:hash()});}
-if(suffix==='git/commits'){s.commits.push({message:body.message,tree:s.lastTree});output({sha:hash()});}
+if(suffix==='git/commits'){s.commits.push({sha:hash(),message:body.message,tree:s.lastTree});output({sha:hash()});}
 if(suffix==='git/refs/heads/main'){if(body.force!==false)throw new Error('Forçage interdit.');s.head=body.sha;output({object:{sha:s.head}});}
 if(suffix.startsWith('releases/tags/')){const release=s.releases.find(r=>r.tag_name===decodeURIComponent(suffix.slice('releases/tags/'.length)));if(!release)missing();output(release);}
 if(suffix==='releases'&&method==='POST'){const release={id:s.releases.length+1,assets:[],...body};s.releases.push(release);output(release);}
