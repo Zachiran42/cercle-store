@@ -1,14 +1,10 @@
-# Vérification de l'édition GitHub — 26 octobre 2026
+# Vérification de Cercle 0.2.1 — 26 octobre 2026
 
-- APK 0.2.0, versionCode 3, minimum Android 8 (API 26), compilé avec Java 21 et Android Build Tools 36.0.0.
-- Signatures APK v2 et v3 vérifiées. Certificat identique à la première version locale de test.
-- 27 tests réussis pour le serveur local, la publication des APK, les signatures, les accès et l'export GitHub.
-- 1 test supplémentaire réussi pour le parcours GitHub simulé : dépôt vide, sources, assets, Pages, réexécution idempotente et refus d'un fichier différent.
-- Vérification réelle sur JVM des classes Java utilisées par Android pour la signature du catalogue et les règles d'URL et de redirection. Altérations et URL non autorisées refusées.
-- Catalogue public vérifié dans le navigateur, y compris sa signature ECDSA avec WebCrypto.
-- Aucun APK personnel n'a été fourni : catalogue personnel vide.
-- À valider sur téléphone : installation, confirmations système, notification, rendu natif et mise à jour d'une application existante sans perte de données.
-- Publication réelle effectuée sur https://zachiran42.github.io/cercle-store/ et dépôt public https://github.com/Zachiran42/cercle-store. GitHub Pages indique built et HTTPS est imposé.
-
-- Téléchargement public sans authentification vérifié : APK de 37 414 octets, SHA-256 75c274d8c20980442631dd39719584949fa113f9ca6672a2f2753d5546af3b0a.
-- Signature du catalogue public vérifiée avec la clé intégrée à la configuration du client. Catalogue personnel encore vide.
+- Version Android 0.2.1, versionCode 4, minimum Android 8 (API 26).
+- Relecture de la version installée au retour sur la fiche, à réception des événements Android d’installation/remplacement/désinstallation pendant que Cercle est visible, et lors de l’actualisation du catalogue. Aucun état « installé » n’est déduit du téléchargement : Android reste la source de vérité.
+- Contrôle de version avant le téléchargement et nouvelle vérification après réception de l’APK.
+- Ouverture directe des applications installées depuis leurs cartes, avec gestion d’une désinstallation ou d’un refus Android entre l’affichage et le clic. Ouverture aussi proposée dans la fiche d’une application dont une mise à jour est disponible.
+- 30 tests réussis : publication des APK, versions égales/anciennes/supérieures, changement de certificat refusé, signatures du catalogue, règles de téléchargement Java, publication GitHub simulée.
+- Parmi ces tests, exécution du code Java réel de téléchargement, avec services Android simulés : ancienne version, même version, version plus récente installée, application absente et numéros de version sur 64 bits. Les versions déjà installées ne provoquent aucun accès réseau ; un téléchargement ne change pas l’état installé.
+- Catalogue : Lisière Compact 1.3.1 (API 24), code original sous licence MIT ; APK original avec notices tierces.
+- Limite : pas de téléphone ni d’émulateur Android connecté ici. Le retour réel de la confirmation d’installation, le rendu natif et le lancement de Lisière restent à vérifier sur téléphone.

@@ -1,4 +1,4 @@
-# Cercle 0.2 — édition GitHub gratuite
+# Cercle 0.2.1 — édition GitHub gratuite
 
 Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
 
@@ -9,9 +9,15 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue initial : aucune application personnelle, puisque les APK de l'utilisateur sont encore en local. L'APK du store est inclus pour son installation et ses futures mises à jour.
-- APK **0.2.0 de test**, versionCode 3, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- Catalogue : Lisière Compact 1.3.1 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- APK **0.2.1 de test**, versionCode 4, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Changements de la version 0.2.1
+
+- Au retour de l’installation Android, la fiche relit la version installée et remplace le bouton de mise à jour par le bouton d’ouverture si la version est à jour.
+- Une version déjà installée ou plus ancienne est refusée avant tout téléchargement. Un téléchargement seul ne marque jamais une application comme installée.
+- Les cartes des applications installées proposent « Ouvrir l’application ». Cette action reste disponible lorsqu’une mise à jour existe, y compris dans sa fiche.
 
 ## Publier depuis cet ordinateur
 
@@ -91,7 +97,7 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.2.0/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.2.1/Cercle.apk)
 
-Version actuelle : **0.2.0**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.2.1**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->

@@ -1,4 +1,4 @@
-param([string]$ToolchainFile = '', [string]$KeyStore = '', [int]$VersionCode = 3, [string]$VersionName = '0.2.0', [string]$OutputName = 'cercle.apk')
+param([string]$ToolchainFile = '', [string]$KeyStore = '', [int]$VersionCode = 4, [string]$VersionName = '0.2.1', [string]$OutputName = 'cercle.apk')
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if (-not $ToolchainFile) { $ToolchainFile = if ($env:CERCLE_TOOLCHAIN) { $env:CERCLE_TOOLCHAIN } else { Join-Path $projectRoot '.toolchain.json' } }
