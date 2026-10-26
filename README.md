@@ -9,7 +9,7 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue : Lisière Compact 1.4.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- Catalogue : Lisière Compact 1.4.0 et Noël Sucré 1.2.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
 - APK **0.3.2 de test**, versionCode 7, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
 

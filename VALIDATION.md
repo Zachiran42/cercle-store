@@ -24,3 +24,5 @@
 - Client API réel testé avec transport HTTPS et préférences Android simulés : vérification ECDSA, cache désactivé, requête fraîche, refus d’altération et de révisions anciennes, protection de la persistance lors de réponses concurrentes.
 - Lisière 1.4.0 : versionCode 6, API 24, APK SHA-256 02fb781cef751eeaa566223eb2dab2aa65fdbbd79a8109375fbe1cad934d5775 ; même certificat que la 1.3.1. Permission Internet ajoutée pour Gutenberg. Notices MIT et tierces présentes dans l’APK et identiques aux fichiers publiés.
 - Le catalogue partagé reste republié explicitement par son propriétaire : aucune synchronisation automatique récurrente des dépôts partagés n’a été mise en place.
+
+- Noël Sucré 1.2.0 ajouté au catalogue : paquet fr.noelsucre.app, versionCode 3, Android 8 minimum, aucune permission demandée. APK SHA-256 8039155039851dd0bfc0d528bd9baf6b8a53a4e74792848972a61c6284b7b35e, signature vérifiée. Polices DM Sans et Fraunces avec licences SIL OFL présentes dans l’APK ; code original publié sous MIT au choix du propriétaire. Fichier APK original conservé. Aucun essai du jeu sur téléphone effectué ici.
