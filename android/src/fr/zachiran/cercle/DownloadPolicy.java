@@ -1,0 +1,7 @@
+package fr.zachiran.cercle;
+import java.io.IOException;import java.net.URI;import java.util.Locale;
+public final class DownloadPolicy {
+ public static URI secure(String value)throws IOException{try{URI u=new URI(value);if(!"https".equals(u.getScheme())||u.getHost()==null||u.getUserInfo()!=null||u.getFragment()!=null||!(u.getPort()==-1||u.getPort()==443))throw new Exception();return u;}catch(Exception e){throw new IOException("Une adresse HTTPS valide est nécessaire.");}}
+ public static void initial(String value,String repository)throws IOException{URI u=secure(value);String prefix="/"+repository+"/releases/download/";if(!u.getHost().equalsIgnoreCase("github.com")||!u.getPath().startsWith(prefix)||!u.getRawPath().equals(u.getPath())||u.getQuery()!=null)throw new IOException("Le lien de l’APK ne correspond pas au dépôt de ce store.");String[] parts=u.getPath().substring(prefix.length()).split("/",-1);if(parts.length!=2||!parts[0].matches("[A-Za-z0-9][A-Za-z0-9._-]*")||!parts[1].matches("[A-Za-z0-9][A-Za-z0-9._-]*\\.apk"))throw new IOException("Le lien du fichier APK est invalide.");}
+ public static void redirect(String value)throws IOException{String host=secure(value).getHost().toLowerCase(Locale.ROOT);if(!(host.equals("github.com")||host.equals("release-assets.githubusercontent.com")||host.equals("objects.githubusercontent.com")))throw new IOException("L’hébergeur du téléchargement n’est pas reconnu.");}
+}

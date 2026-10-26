@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';import {preparePublication,publishGitHub} from '../server/github.mjs';import {createStore} from '../server/main.mjs';
+const root=path.resolve(import.meta.dirname,'..'),dataDir=path.join(root,'data');const tools=JSON.parse(fs.readFileSync(path.join(root,'.toolchain.json'),'utf8'));
+test('publication GitHub simulée : création, fichiers, Pages, reprise et conflit',async t=>{
+ const temp=fs.mkdtempSync(path.join(root,'build','fake-github-')),file=path.join(temp,'state.json');const original=process.env.NODE_OPTIONS,oldState=process.env.CERCLE_FAKE_STATE;
+ t.after(()=>{if(original===undefined)delete process.env.NODE_OPTIONS;else process.env.NODE_OPTIONS=original;if(oldState===undefined)delete process.env.CERCLE_FAKE_STATE;else process.env.CERCLE_FAKE_STATE=oldState;assert.equal(path.dirname(path.resolve(temp)),path.join(root,'build'));assert.ok(path.basename(temp).startsWith('fake-github-'));fs.rmSync(temp,{recursive:true,force:true});});
+ fs.writeFileSync(file,JSON.stringify({exists:false,head:null,marker:null,releases:[],pages:null,blobs:{},calls:[],commits:[]}));
+ const prepared=await preparePublication({root,dataDir,db:createStore({dataDir}).getState(),tools});
+ process.env.NODE_OPTIONS='--import='+pathToFileURL(path.join(root,'tests','fake-gh.mjs')).href;process.env.CERCLE_FAKE_STATE=file;
+ const fakeTools={...tools,ghExecutable:process.execPath};const first=await publishGitHub({root,prepared,tools:fakeTools});assert.equal(first.status,'building');let s=JSON.parse(fs.readFileSync(file));assert.equal(s.exists,true);assert.equal(s.releases.length,prepared.manifest.releases.length);assert.ok(s.releases.every(r=>!r.draft&&r.assets.length===1));assert.equal(s.pages.source.path,'/docs');assert.ok(s.commits.at(-1).tree.some(e=>e.path==='docs/catalog.json'));assert.ok(!s.commits.at(-1).tree.some(e=>e.path.startsWith('data/')||e.path.endsWith('.keystore')||e.path==='.toolchain.json'));
+ const uploadCount=s.calls.filter(c=>c.args[0]==='release').length;
+ s.pages.build_type='workflow';fs.writeFileSync(file,JSON.stringify(s));await publishGitHub({root,prepared,tools:fakeTools});s=JSON.parse(fs.readFileSync(file));assert.equal(s.pages.build_type,'legacy');assert.equal(s.calls.filter(c=>c.args[0]==='release').length,uploadCount);
+ const commits=s.commits.length;s.releases[0].assets[0].digest='sha256:'+'0'.repeat(64);fs.writeFileSync(file,JSON.stringify(s));await assert.rejects(publishGitHub({root,prepared,tools:fakeTools}),/fichier différent/);s=JSON.parse(fs.readFileSync(file));assert.equal(s.commits.length,commits);
+});

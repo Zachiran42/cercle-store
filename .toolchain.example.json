@@ -1,0 +1,5 @@
+{
+  "javaHome": "C:/chemin/vers/jdk-21",
+  "androidJar": "C:/chemin/vers/android-sdk/platforms/android-36/android.jar",
+  "buildTools": "C:/chemin/vers/android-sdk/build-tools/36.0.0"
+}

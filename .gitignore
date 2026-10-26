@@ -1,0 +1,8 @@
+node_modules/
+data/
+build/
+*.keystore
+*.jks
+*.pem
+.env
+.toolchain.json

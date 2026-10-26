@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createStore} from '../server/main.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const repository=process.argv[2]||'Zachiran42/cercle-store';
+if(!/^[A-Za-z0-9][A-Za-z0-9-]{0,38}\/[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(repository))throw new Error('Indiquez propriétaire/dépôt.');
+const {getState}=createStore({dataDir:process.env.CERCLE_DATA_DIR||path.join(root,'data')});
+const config={schema:1,repository,pagesUrl:'https://'+repository.split('/')[0].toLowerCase()+'.github.io/'+encodeURIComponent(repository.split('/')[1])+'/',publicKey:getState().publicKey,storeVersion:'0.2.0',storeVersionCode:3};
+fs.writeFileSync(path.join(root,'github-store.json'),JSON.stringify(config,null,2)+'\n');
+const xmlEscape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const resources='<resources><string name="github_catalog_url">'+xmlEscape(config.pagesUrl+'catalog.json')+'</string><string name="github_public_key">'+config.publicKey+'</string><string name="github_repository">'+config.repository+'</string></resources>';
+fs.writeFileSync(path.join(root,'android','res','values','github_store.xml'),resources);
+console.log('Configuration prête pour '+repository+'. La clé privée reste dans le dossier data, hors Git.');

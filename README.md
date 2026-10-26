@@ -1,0 +1,89 @@
+# Cercle 0.2 — édition GitHub gratuite
+
+Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
+
+Votre ordinateur n'est nécessaire que pour préparer et publier des applications. Une fois envoyés, les fichiers restent accessibles sur GitHub quand votre PC est éteint. Aucun VPS, serveur familial, domaine payant ou abonnement n'est nécessaire pour cette configuration publique, dans les limites des services gratuits de GitHub.
+
+## État de cette livraison
+
+- Dépôt prévu : **Zachiran42/cercle-store**.
+- Adresse prévue après publication : **https://zachiran42.github.io/cercle-store/**.
+- Ces adresses ne prouvent pas qu'une publication a été effectuée. Le rapport VALIDATION.md précise l'état vérifié.
+- Catalogue initial : aucune application personnelle, puisque les APK de l'utilisateur sont encore en local. L'APK du store est inclus pour son installation et ses futures mises à jour.
+- APK **0.2.0 de test**, versionCode 3, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Publier depuis cet ordinateur
+
+Utilisez le dossier de travail cercle-github existant : ses données et clés privées y sont déjà présentes, hors des fichiers publiés.
+
+1. **CONNECTER-GITHUB.cmd** : connectez le compte Zachiran42 avec l'outil officiel GitHub CLI. Sur le site GitHub, vérifiez la demande d'autorisation et validez-la vous-même. Aucun mot de passe ni jeton ne doit être communiqué dans le chat.
+2. **DEMARRER.cmd** : démarrez votre espace local et ouvrez **http://127.0.0.1:8787/admin**. Gardez la console ouverte pendant la publication ; Ctrl+C arrête l'outil.
+3. Le premier mot de passe administrateur est dans le fichier privé **data/premier-acces-admin.txt**. Vous pouvez le changer dans Réglages.
+4. Dans **Publier une appli**, ajoutez votre APK universel signé (200 Mo maximum), son nom, sa description et sa licence. Le lien du code source peut être renseigné plus tard.
+5. Dans **Réglages**, utilisez **Préparer et voir le catalogue** pour vérifier le résultat.
+6. Confirmez que les fichiers seront publics, puis cliquez sur **Envoyer sur GitHub**. Le premier envoi crée le dépôt public s'il n'existe pas, publie les APK et configure GitHub Pages.
+7. GitHub peut mettre quelques minutes à construire le site. Ouvrez son adresse HTTPS pour vérifier qu'il est prêt avant de l'envoyer à vos proches.
+
+L'outil de publication est privé et local ; seul le catalogue statique est envoyé sur Pages. Votre mot de passe administrateur, les jetons, données privées et clés privées ne sont jamais ajoutés aux sources ou aux Pages.
+
+### Ajouter ou mettre à jour une application
+
+Ajoutez l'APK dans l'administration, puis envoyez le nouveau catalogue sur GitHub. Une mise à jour conserve le même identifiant et le même certificat de signature, avec un versionCode supérieur. Cercle refuse les anciennes versions et les changements de certificat.
+
+Chaque version possède sa propre Release. Un APK déjà présent avec un autre contenu n'est jamais écrasé : publiez une nouvelle version. Masquer une application la retire du prochain catalogue, mais ne supprime pas son ancien fichier public de GitHub.
+
+## Les clés à conserver
+
+Sauvegardez de façon privée et chiffrée :
+
+- **data/** : notamment catalog-private.pem et store.json, qui conservent la clé de confiance du catalogue et les informations de publication ;
+- **build/cercle-preview.keystore** pour cette phase de test, afin de pouvoir mettre le store à jour avec le même certificat ;
+- les clés de signature de chacune de vos propres applications.
+
+Ces éléments sont exclus du dépôt public et de l'archive de sources. Ne supprimez pas le dossier de travail après avoir téléchargé uniquement l'archive : les clés n'y sont volontairement pas incluses. En cas de changement de machine, restaurez vos clés et données privées avant de republier. Avant une distribution durable, validez la gestion de la clé du store et une sauvegarde récupérable ; la livraison reste une version de test.
+
+## Sur un autre ordinateur
+
+Node.js 22+, Java 21, Android SDK plateforme API 36, Build Tools 36.0.0 et GitHub CLI sont utilisés. Aucune dépendance npm n'est nécessaire.
+
+Copiez .toolchain.example.json en .toolchain.json et renseignez javaHome, androidJar et buildTools. Les champs optionnels ghExecutable et ghConfigDir permettent de choisir le binaire GitHub CLI et son dossier de configuration local. Sans ces champs, le programme utilise gh depuis le PATH et sa configuration habituelle.
+
+Les chemins de cet ordinateur sont dans .toolchain.json, exclu de Git et de l'archive. Sur cet ordinateur, la connexion GitHub CLI est séparée de la connexion du plugin GitHub de Codex.
+
+## Configuration et commandes
+
+Une configuration neuve s'initialise avec :
+
+    node scripts/configure-github.mjs PROPRIETAIRE/DEPOT
+
+Cette commande conserve la clé locale existante, écrit github-store.json et intègre l'adresse et la clé publique dans les ressources Android. Si le dépôt ou la clé de confiance change, il faut recompiler et redistribuer le client. Ne lancez pas une nouvelle initialisation sur un store existant sans restaurer d'abord ses clés.
+
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-android.ps1
+    node scripts/publish-github.mjs
+    node scripts/publish-github.mjs --publish
+
+La première commande compile le client et vérifie sa signature. La deuxième prépare les fichiers localement, sans envoi. La troisième effectue une publication publique avec le compte GitHub connecté. Arrêtez l’administration locale avant cette commande manuelle ; avec le bouton de l’administration, gardez au contraire le serveur ouvert.
+
+Pour une prochaine version du store, augmenter storeVersion et storeVersionCode dans github-store.json, puis compiler avec les mêmes VersionName et VersionCode. Une empreinte de compilation empêche de publier un APK construit avec une autre configuration.
+
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test.ps1
+
+Ce script construit les APK de test et vérifie les publications, signatures et mises à jour. La publication GitHub est simulée pendant les tests : ils ne créent aucun dépôt ni Release réels.
+
+## Sécurité et fonctionnement
+
+- Catalogue signé en ECDSA P-256 ; la clé publique est intégrée au client Android.
+- Numéro de révision signé pour refuser un retour à un catalogue antérieur déjà reçu. Un catalogue statique ne devient pas invalide après une semaine sans nouvelle application.
+- Contrôle du SHA-256, du nom de paquet, de la version et des certificats de chaque APK téléchargé, puis confirmation par l'installateur Android.
+- URL d'origine limitée aux Releases du dépôt configuré, redirections HTTPS limitées aux domaines de téléchargement GitHub autorisés ; aucun jeton GitHub dans l'application.
+- Recherche périodique des mises à jour et notification facultative selon les autorisations et contraintes Android.
+- Administration locale protégée par mot de passe, cookie HttpOnly et anti-CSRF.
+
+Cette édition utilise un client natif dédié et un catalogue signé spécifique, pas le format F-Droid. Les APK et le catalogue sont publics ; il n'y a plus d'invitations pour les proches. Les anciens endpoints privés conservés dans l'outil local ne sont pas déployés sur GitHub Pages.
+
+## Limites actuelles
+
+Pas encore de test sur téléphone/émulateur, d'APK fractionnés, de rotation de certificats, de gestion multi-administrateurs ni de publication automatique lors d'un push de chaque projet. Vous pouvez cependant ajouter vos applications progressivement depuis leurs fichiers locaux. Les exigences Android de distribution hors Google Play restent applicables.
+
+Code du store sous licence MIT. Chaque application conserve sa propre licence.

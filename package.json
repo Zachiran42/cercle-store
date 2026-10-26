@@ -1,0 +1,17 @@
+{
+  "name": "cercle-store",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Store Android gratuit avec catalogue signé sur GitHub Pages et APK dans Releases.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/main.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "github:prepare": "node scripts/publish-github.mjs",
+    "github:publish": "node scripts/publish-github.mjs --publish"
+  },
+  "license": "MIT"
+}

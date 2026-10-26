@@ -1,0 +1,1 @@
+import path from 'node:path';import {fileURLToPath} from 'node:url';import {buildStamp} from '../server/github.mjs';const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');buildStamp(root,process.argv[2],process.argv[3],process.argv[4]);
