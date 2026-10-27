@@ -6,7 +6,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const repository=process.argv[2]||'Zachiran42/cercle-store';
 if(!/^[A-Za-z0-9][A-Za-z0-9-]{0,38}\/[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(repository))throw new Error('Indiquez propriétaire/dépôt.');
 const {getState}=createStore({dataDir:process.env.CERCLE_DATA_DIR||path.join(root,'data')});
-const config={schema:1,repository,pagesUrl:'https://'+repository.split('/')[0].toLowerCase()+'.github.io/'+encodeURIComponent(repository.split('/')[1])+'/',publicKey:getState().publicKey,storeVersion:'0.3.2',storeVersionCode:7};
+const config={schema:1,repository,pagesUrl:'https://'+repository.split('/')[0].toLowerCase()+'.github.io/'+encodeURIComponent(repository.split('/')[1])+'/',publicKey:getState().publicKey,storeVersion:'0.3.3',storeVersionCode:8};
 fs.writeFileSync(path.join(root,'github-store.json'),JSON.stringify(config,null,2)+'\n');
 const xmlEscape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const resources='<resources><string name="github_catalog_url">'+xmlEscape(config.pagesUrl+'catalog.json')+'</string><string name="github_public_key">'+config.publicKey+'</string><string name="github_repository">'+config.repository+'</string></resources>';

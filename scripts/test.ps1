@@ -4,7 +4,7 @@ $projectRoot = Split-Path -Parent $PSScriptRoot
 if (-not $ToolchainFile) { $ToolchainFile = Join-Path $projectRoot '.toolchain.json' }
 $tools = Get-Content -Raw -LiteralPath $ToolchainFile | ConvertFrom-Json
 & (Join-Path $PSScriptRoot 'build-android.ps1') -ToolchainFile $ToolchainFile
-& (Join-Path $PSScriptRoot 'build-android.ps1') -ToolchainFile $ToolchainFile -VersionCode 8 -VersionName '0.3.3-test' -OutputName 'cercle-update-test.apk'
+& (Join-Path $PSScriptRoot 'build-android.ps1') -ToolchainFile $ToolchainFile -VersionCode 9 -VersionName '0.3.4-test' -OutputName 'cercle-update-test.apk'
 $testDir = Join-Path $projectRoot 'build\qa'
 New-Item -ItemType Directory -Path $testDir -Force | Out-Null
 $env:CERCLE_TEST_KEY_PASS = 'test-only'

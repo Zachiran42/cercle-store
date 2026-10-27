@@ -1,4 +1,4 @@
-# Cercle 0.3.2 — édition GitHub gratuite
+# Cercle 0.3.3 — édition GitHub gratuite
 
 Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
 
@@ -8,9 +8,9 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
-- Publication effectuée et vérifiée le 26 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue : Lisière Compact 1.4.0 et Noël Sucré 1.2.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
-- APK **0.3.2 de test**, versionCode 7, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- Publication effectuée et vérifiée le 27 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
+- Catalogue : Lisière Compact 1.5.0 et Noël Sucré 1.2.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- APK **0.3.3 de test**, versionCode 8, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
 
 ## Mise à jour de Cercle — version 0.3.2
@@ -19,12 +19,19 @@ Un encart **Mise à jour de Cercle** reste visible dans **Mon Cercle** et **Mise
 
 La vérification recharge le catalogue signé avec une requête destinée à éviter un ancien cache HTTP. Elle ne dépend pas de la fin des vérifications des dépôts personnels. Une erreur réseau ou une fiche absente est signalée comme une vérification impossible, sans prétendre que Cercle est à jour. Le certificat doit correspondre à celui du store installé.
 
-### Comment les mises à jour des applications sont détectées
+### Recherche directe sur GitHub — version 0.3.3
 
-- **Catalogue partagé, dont Lisière** : le propriétaire ajoute le nouvel APK signé dans l’administration puis republie le catalogue. Un tag ou une release dans le dépôt d’origine ne met pas le catalogue partagé à jour automatiquement. Cercle compare le versionCode publié dans ce catalogue à celui installé sur le téléphone.
-- **Mes ajouts personnels** : Cercle interroge directement GitHub Releases pour le dépôt choisi par l’utilisateur. Une nouvelle publication est signalée, puis l’APK est vérifié à la demande avant installation.
+**Vérifier les mises à jour** et **Actualiser le catalogue** rechargent le catalogue signé puis consultent aussi GitHub Releases pour les applications partagées dont la fiche contient un dépôt GitHub public. Cette recherche fonctionne également au démarrage et lors de la vérification périodique Android (intervalle prévu de 6 heures, exécution dépendant du système).
 
-La version 1.4.0 de Lisière a été synchronisée dans cette livraison : versionCode 6, même identifiant et certificat que la 1.3.1, recherche Gutenberg et import multiple.
+Une nouvelle publication stable avec un APK fait apparaître **Vérifier la version**, puis **Vérifier et installer** dans la fiche. À ce stade, le tag GitHub indique une publication à contrôler, pas encore un numéro de version Android vérifié. Le téléchargement se fait à la demande ; Cercle contrôle la taille, l’empreinte GitHub lorsqu’elle est disponible, l’identifiant, le certificat et le vrai versionCode. Android confirme ensuite l’installation.
+
+Le dépôt et le certificat sont ceux autorisés par la fiche du catalogue signé. Les métadonnées de GitHub ne remplacent pas le nom, la description ou la licence de cette fiche. Une ancienne version, un autre paquet ou un autre certificat sont refusés. Un APK déjà inspecté avec un versionCode égal ou inférieur cesse d’être signalé lors des vérifications suivantes. Si plusieurs variantes existent, Cercle conserve la famille connue ou signale une ambiguïté sans choisir au hasard.
+
+Ces observations sont conservées uniquement sur le téléphone. Le site public continue à afficher les versions publiées par le propriétaire dans le catalogue. Une nouvelle fiche signée changeant la source, la version de référence ou le certificat invalide les observations précédentes ; une application retirée ne reste pas affichée à cause du cache.
+
+**Mes ajouts personnels** continuent à consulter leur dépôt choisi. **Cercle lui-même** conserve son circuit dédié : seul son catalogue signé peut proposer sa mise à jour. Les dépôts privés et les APK fractionnés ne sont pas pris en charge.
+
+Le catalogue de référence contient Lisière 1.5.0 (versionCode 7) et Noël Sucré 1.2.0 (versionCode 3). Après installation de Cercle 0.3.3, les prochaines publications stables de ces dépôts sont recherchées directement, sans devoir republier chaque mise à jour dans le catalogue.
 
 ## Préparation de l’installation — version 0.3.1
 
@@ -71,7 +78,7 @@ L'outil de publication est privé et local ; seul le catalogue statique est envo
 
 ### Ajouter ou mettre à jour une application
 
-Ajoutez l'APK dans l'administration, puis envoyez le nouveau catalogue sur GitHub. Une mise à jour conserve le même identifiant et le même certificat de signature, avec un versionCode supérieur. Cercle refuse les anciennes versions et les changements de certificat.
+Pour publier la version de référence sur le site, ajoutez l'APK dans l'administration puis envoyez le nouveau catalogue sur GitHub. Le client Android 0.3.3 recherche aussi directement les publications stables du dépôt source GitHub. Une mise à jour conserve le même identifiant et le même certificat de signature, avec un versionCode supérieur. Cercle refuse les anciennes versions et les changements de certificat.
 
 Chaque version possède sa propre Release. Un APK déjà présent avec un autre contenu n'est jamais écrasé : publiez une nouvelle version. Masquer une application la retire du prochain catalogue, mais ne supprime pas son ancien fichier public de GitHub.
 
@@ -118,7 +125,7 @@ Ce script construit les APK de test et vérifie les publications, signatures et 
 - Catalogue signé en ECDSA P-256 ; la clé publique est intégrée au client Android.
 - Numéro de révision signé pour refuser un retour à un catalogue antérieur déjà reçu. Un catalogue statique ne devient pas invalide après une semaine sans nouvelle application.
 - Contrôle du SHA-256, du nom de paquet, de la version et des certificats de chaque APK téléchargé, puis confirmation par l'installateur Android.
-- URL d'origine limitée aux Releases du dépôt configuré, redirections HTTPS limitées aux domaines de téléchargement GitHub autorisés ; aucun jeton GitHub dans l'application.
+- URL d'origine limitée aux Releases du dépôt configuré pour le catalogue et Cercle ; les mises à jour directes sont limitées au dépôt source de la fiche signée et à son certificat. Redirections HTTPS limitées aux domaines de téléchargement GitHub autorisés ; aucun jeton GitHub dans l'application.
 - Recherche périodique des mises à jour et notification facultative selon les autorisations et contraintes Android.
 - Administration locale protégée par mot de passe, cookie HttpOnly et anti-CSRF.
 
@@ -133,7 +140,7 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.2/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.3/Cercle.apk)
 
-Version actuelle : **0.3.2**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.3.3**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->

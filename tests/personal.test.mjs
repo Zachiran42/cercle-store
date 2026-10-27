@@ -13,6 +13,7 @@ test('ajouts GitHub : consentement local, isolation, mises à jour et refus des 
  const temp=fs.mkdtempSync(path.join(root,'build','personal-test-'));
  try{
  const files={
+  'fr/zachiran/cercle/SharedUpdatesChecks.java':fs.readFileSync(path.join(root,'tests/SharedUpdatesChecks.java'),'utf8'),
   'android/os/Build.java':'package android.os;public class Build{public static class VERSION{public static int SDK_INT=35;}}',
   'android/content/Context.java':'package android.content;import android.content.pm.PackageManager;import java.io.File;import java.util.*;public class Context{public PackageManager pm=new PackageManager();public Map<String,String> values=new HashMap<>();public File cache;public Context(File dir){cache=dir;dir.mkdirs();}public PackageManager getPackageManager(){return pm;}public File getCacheDir(){return cache;}public String getPackageName(){return "fr.zachiran.cercle";}}',
   'android/content/pm/PackageManager.java':'package android.content.pm;public class PackageManager{public static final int GET_SIGNING_CERTIFICATES=1,GET_SIGNATURES=2;public PackageInfo info,archive;public PackageInfo getPackageInfo(String p,int flags)throws NameNotFoundException{if(info==null||!p.equals(info.packageName))throw new NameNotFoundException();return info;}public PackageInfo getPackageArchiveInfo(String p,int flags){return archive;}public static class NameNotFoundException extends Exception{}}',
@@ -22,8 +23,8 @@ test('ajouts GitHub : consentement local, isolation, mises à jour et refus des 
   'android/content/pm/Signature.java':'package android.content.pm;public class Signature{String value;public Signature(String s){value=s;}public byte[] toByteArray(){return value.getBytes(java.nio.charset.StandardCharsets.UTF_8);}}',
   'fr/zachiran/cercle/Access.java':'package fr.zachiran.cercle;import android.content.Context;final class Access{static Prefs prefs(Context c){return new Prefs(c);}static class Prefs{Context c;Prefs(Context x){c=x;}String getString(String k,String fallback){return c.values.getOrDefault(k,fallback);}Editor edit(){return new Editor(c);}}static class Editor{Context c;String key,value;Editor(Context x){c=x;}Editor putString(String k,String v){key=k;value=v;return this;}boolean commit(){c.values.put(key,value);return true;}}}',
   'fr/zachiran/cercle/Api.java':[
-   'package fr.zachiran.cercle;import java.net.*;import java.io.*;import java.util.*;final class Api{',
-   'static int downloads;static byte[] data="apk-fixture".getBytes(java.nio.charset.StandardCharsets.UTF_8);static Map<String,String> json=new HashMap<>();static Map<String,Integer> codes=new HashMap<>();',
+   'package fr.zachiran.cercle;import org.json.*;import java.net.*;import java.io.*;import java.util.*;final class Api{',
+   'static JSONObject catalog;static JSONObject cached(android.content.Context c){return catalog;}static int downloads;static byte[] data="apk-fixture".getBytes(java.nio.charset.StandardCharsets.UTF_8);static Map<String,String> json=new HashMap<>();static Map<String,Integer> codes=new HashMap<>();',
    'static HttpURLConnection open(String u)throws Exception{if(!json.containsKey(u)&&!codes.containsKey(u))throw new IOException("Missing endpoint "+u);return new Fake(u,json.getOrDefault(u,"{}").getBytes(java.nio.charset.StandardCharsets.UTF_8),codes.getOrDefault(u,200));}',
    'static HttpURLConnection personalDownload(String url,String repo)throws Exception{GitHubSourcePolicy.download(url,repo);downloads++;return new Fake(url,data,200);}',
    'static HttpURLConnection download(android.content.Context c,String url)throws Exception{throw new AssertionError("Shared path should not be used");}',
@@ -53,14 +54,14 @@ test('ajouts GitHub : consentement local, isolation, mises à jour et refus des 
    'JSONObject current=PersonalApps.all(c).getJSONObject(0);String endpoint="https://api.github.com/repos/"+repo+"/releases/latest";Api.json.put(endpoint,release("v4",asset(4,"reader-4.0-arm64.apk"),asset(5,"reader-4.0-x86.apk")).toString());ok(PersonalApps.refresh(c).isEmpty());JSONObject selected=PersonalApps.all(c).getJSONObject(0);ok(selected.getJSONObject("release").getString("assetName").contains("arm64"));ok(PersonalApps.pending(selected));',
    'Api.codes.put(endpoint,429);ok(!PersonalApps.refresh(c).isEmpty());ok(PersonalApps.all(c).length()==1);Api.codes.clear();Api.json.put(endpoint,release("v5",asset(6,"unrelated-a.apk"),asset(7,"unrelated-b.apk")).toString());ok(!PersonalApps.refresh(c).isEmpty());ok(PersonalApps.all(c).getJSONObject(0).getJSONObject("release").getLong("assetId")==4);',
    'JSONObject stale=PersonalApps.all(c).getJSONObject(0);PersonalApps.remove(c,"app.reader");ok(PersonalApps.all(c).length()==0);before=Api.downloads;reject(()->PersonalApps.download(c,stale,p->{}));ok(Api.downloads==before);PersonalApps.recordCandidate(c,stale,next);ok(PersonalApps.all(c).length()==0);',
-   'System.out.println("Personal app checks OK: "+checks);}}'
+   'SharedUpdatesChecks.run(new File(dir,"shared"));System.out.println("Personal app checks OK: "+checks);}}'
   ].join('\n')
  };
  for(const [p,s] of Object.entries(files)){const file=path.join(temp,p);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,s);}
  const classes=path.join(temp,'classes');fs.mkdirSync(classes);const bin=path.join(tools.javaHome,'bin');
- const native=['Packages','PersonalApps','GitHubSourcePolicy','DownloadPolicy'].map(n=>path.join(root,'android/src/fr/zachiran/cercle',n+'.java'));
+ const native=['Packages','PersonalApps','SharedUpdates','GitHubSourcePolicy','DownloadPolicy'].map(n=>path.join(root,'android/src/fr/zachiran/cercle',n+'.java'));
  await command(path.join(bin,'javac.exe'),['-encoding','UTF-8','-source','8','-target','8','-cp',jar,'-d',classes,...native,...Object.keys(files).map(p=>path.join(temp,p))]);
  const result=await command(path.join(bin,'java.exe'),['-cp',classes+path.delimiter+jar,'fr.zachiran.cercle.PersonalTest',temp]);
- assert.match(result,/Personal app checks OK: [5-9][0-9]/);
+ assert.match(result,/Personal app checks OK: [5-9][0-9]/);assert.match(result,/Shared upstream checks OK: [4-9][0-9]/);
  }finally{assert.equal(path.dirname(path.resolve(temp)),path.join(root,'build'));assert.ok(path.basename(temp).startsWith('personal-test-'));fs.rmSync(temp,{recursive:true,force:true});}
 });

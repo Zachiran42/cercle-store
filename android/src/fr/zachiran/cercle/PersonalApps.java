@@ -32,7 +32,7 @@ final class PersonalApps {
  static List<String> signers(JSONObject release)throws Exception{List<String> result=new ArrayList<>();JSONArray a=release.getJSONArray("signers");for(int i=0;i<a.length();i++)result.add(a.getString(i));Collections.sort(result);return result;}
  static JSONObject json(String endpoint)throws Exception{
   if(!endpoint.startsWith("https://api.github.com/repos/"))throw new IOException("Adresse GitHub invalide.");
-  HttpURLConnection con=Api.open(endpoint);try{con.setRequestProperty("Accept","application/vnd.github+json");int status=con.getResponseCode();if(status==404)throw new FileNotFoundException("Dépôt public ou publication introuvable.");if(status==403||status==429)throw new IOException("GitHub limite les requêtes pour le moment. Réessayez plus tard.");if(status!=200)throw new IOException("GitHub est indisponible pour le moment.");ByteArrayOutputStream out=new ByteArrayOutputStream();try(InputStream in=con.getInputStream()){byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){out.write(b,0,n);if(out.size()>2*1024*1024)throw new IOException("La réponse GitHub est trop volumineuse.");}}String text=out.toString("UTF-8");return text.trim().startsWith("[")?new JSONObject().put("items",new JSONArray(text)):new JSONObject(text);}finally{con.disconnect();}
+  HttpURLConnection con=Api.open(endpoint);con.setUseCaches(false);con.setRequestProperty("Cache-Control","no-cache");try{con.setRequestProperty("Accept","application/vnd.github+json");int status=con.getResponseCode();if(status==404)throw new FileNotFoundException("Dépôt public ou publication introuvable.");if(status==403||status==429)throw new IOException("GitHub limite les requêtes pour le moment. Réessayez plus tard.");if(status!=200)throw new IOException("GitHub est indisponible pour le moment.");ByteArrayOutputStream out=new ByteArrayOutputStream();try(InputStream in=con.getInputStream()){byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){out.write(b,0,n);if(out.size()>2*1024*1024)throw new IOException("La réponse GitHub est trop volumineuse.");}}String text=out.toString("UTF-8");return text.trim().startsWith("[")?new JSONObject().put("items",new JSONArray(text)):new JSONObject(text);}finally{con.disconnect();}
  }
  static JSONObject latest(String repo)throws Exception{
   String endpoint="https://api.github.com/repos/"+GitHubSourcePolicy.repository(repo)+"/releases";
@@ -59,7 +59,8 @@ final class PersonalApps {
    if(cache.exists()&&!cache.delete())throw new IOException("Le cache APK ne peut pas être remplacé.");if(!file.renameTo(cache))throw new IOException("Le fichier APK ne peut pas être conservé.");valid=true;return cache;
   }finally{if(con!=null)con.disconnect();if(!valid)file.delete();}
  }
- static JSONObject inspect(Context c,JSONObject candidate,File file)throws Exception{
+ static JSONObject inspect(Context c,JSONObject candidate,File file)throws Exception{return inspect(c,candidate,file,true);}
+ static JSONObject inspect(Context c,JSONObject candidate,File file,boolean personalIdentity)throws Exception{
   JSONObject app=new JSONObject(candidate.toString()),release=app.getJSONObject("release");
   PackageInfo info=c.getPackageManager().getPackageArchiveInfo(file.getAbsolutePath(),Build.VERSION.SDK_INT>=28?PackageManager.GET_SIGNING_CERTIFICATES:PackageManager.GET_SIGNATURES);
   if(info==null||info.applicationInfo==null||Packages.version(info)<1||info.splitNames!=null&&info.splitNames.length>0)throw new IOException("Choisissez un APK Android autonome et signé.");
@@ -70,7 +71,7 @@ final class PersonalApps {
   info.applicationInfo.sourceDir=file.getAbsolutePath();info.applicationInfo.publicSourceDir=file.getAbsolutePath();CharSequence label=info.applicationInfo.loadLabel(c.getPackageManager());String name=label==null?info.packageName:label.toString().trim();if(name.isEmpty())name=info.packageName;
   app.put("packageName",info.packageName).put("name",name.substring(0,Math.min(80,name.length()))).put("pendingCheck",false);
   release.put("versionCode",Packages.version(info)).put("versionName",info.versionName==null?String.valueOf(Packages.version(info)):info.versionName).put("minSdk",info.applicationInfo.minSdkVersion).put("sha256",hash(file)).put("signers",new JSONArray(certs));
-  JSONObject old=find(all(c),info.packageName);if(old!=null)sameIdentity(old,app);return app;
+  JSONObject old=find(all(c),info.packageName);if(personalIdentity&&old!=null)sameIdentity(old,app);return app;
  }
  static boolean sameAsset(JSONObject a,JSONObject b)throws Exception{JSONObject x=a.getJSONObject("release"),y=b.getJSONObject("release");return x.getLong("assetId")==y.getLong("assetId")&&x.getLong("size")==y.getLong("size")&&x.getString("downloadUrl").equals(y.getString("downloadUrl"))&&(y.optString("sha256").isEmpty()||x.optString("sha256").equals(y.optString("sha256")));}
  static synchronized void recordCandidate(Context c,JSONObject previous,JSONObject candidate)throws Exception{

@@ -9,6 +9,7 @@ test('le téléchargement relit la version installée avant tout accès réseau'
  const temp=fs.mkdtempSync(path.join(root,'build','package-state-'));
  try{
   const files={
+   'fr/zachiran/cercle/SharedUpdates.java':'package fr.zachiran.cercle;import android.content.Context;import org.json.JSONObject;import java.io.File;final class SharedUpdates{static File download(Context c,JSONObject a,Packages.Progress p){throw new AssertionError();}}',
    'android/os/Build.java':'package android.os; public class Build {public static class VERSION {public static int SDK_INT=35;}}',
    'android/content/Context.java':'package android.content; import android.content.pm.PackageManager; import java.io.File; public class Context {public PackageManager pm=new PackageManager();public PackageManager getPackageManager(){return pm;}public File getCacheDir(){throw new AssertionError("Cache touched before version check");}}',
    'android/content/pm/PackageManager.java':'package android.content.pm; public class PackageManager {public static final int GET_SIGNING_CERTIFICATES=1,GET_SIGNATURES=2;public PackageInfo info;public PackageInfo getPackageInfo(String p,int flags)throws NameNotFoundException{if(info==null)throw new NameNotFoundException();return info;}public PackageInfo getPackageArchiveInfo(String p,int flags){return null;}public static class NameNotFoundException extends Exception {}}',
