@@ -31,7 +31,14 @@
           "severity": "MODERATE",
           "url": "https://github.com/advisories/GHSA-pmhh-3w7g-xqp8"
         }
-      ]
+      ],
+      "recheck": {
+        "date": "2026-10-27",
+        "releaseUnchanged": true,
+        "apkDigestVerified": true,
+        "apkSignatureVerified": true,
+        "basis": "Stable release unchanged; XML parser call sites present. Bounded 64 MiB JVM test of declared jsoup version exhausted heap with a synthetic 102793-character XML document. Library test only, not an exploit demonstrated on the Android app."
+      }
     },
     {
       "repository": "breezy-weather/breezy-weather",
@@ -137,13 +144,20 @@
           "severity": "MODERATE",
           "url": "https://github.com/advisories/GHSA-mqvp-7rrg-9jxc"
         }
-      ]
+      ],
+      "recheck": {
+        "date": "2026-10-27",
+        "releaseUnchanged": true,
+        "apkDigestVerified": true,
+        "apkSignatureVerified": true,
+        "basis": "Stable release unchanged; XML parser call sites present. Bounded 64 MiB JVM test of declared jsoup version exhausted heap with a synthetic 102793-character XML document. Library test only, not an exploit demonstrated on the Android app."
+      }
     },
     {
       "repository": "iSoron/uhabits",
       "name": "Loop Habit Tracker",
       "version": "2.3.2",
-      "decision": "deferred",
+      "decision": "retained",
       "date": "2026-10-27",
       "sourceCommit": "7afc799cfb6959f8a9d892417d6427a262bfb13a",
       "sourceScope": "targeted review of release-source snapshot",
@@ -173,7 +187,14 @@
           "severity": "HIGH",
           "url": "https://github.com/advisories/GHSA-xxph-c9ww-hj94"
         }
-      ]
+      ],
+      "recheck": {
+        "date": "2026-10-27",
+        "releaseUnchanged": true,
+        "apkDigestVerified": true,
+        "apkSignatureVerified": true,
+        "basis": "Android APK has no ObjectInputStream references, no serialization methods identified, no native libraries; imports are CSV/SQLite; vulnerable Commons IO is test-only and ClassUtils.getClass use was not found. No exhaustive proof against reflection or all future variants."
+      }
     },
     {
       "repository": "yairm210/Unciv",
@@ -193,7 +214,7 @@
       "repository": "00-Evan/shattered-pixel-dungeon",
       "name": "Shattered Pixel Dungeon",
       "version": "4.0.2",
-      "decision": "deferred",
+      "decision": "retained",
       "date": "2026-10-27",
       "sourceCommit": "57a4e06a4caf162446d1c28caa7983f0493fecf0",
       "sourceScope": "targeted review of release-source snapshot",
@@ -216,7 +237,14 @@
           "severity": "HIGH",
           "url": "https://github.com/advisories/GHSA-4jq9-2xhw-jpx7"
         }
-      ]
+      ],
+      "recheck": {
+        "date": "2026-10-27",
+        "releaseUnchanged": true,
+        "apkDigestVerified": true,
+        "apkSignatureVerified": true,
+        "basis": "Explicit user request; official standalone APK signature/digest valid. Shared dependency alert is not a demonstrated Android exploit. Source comments mention framework org.json, but R8-obfuscated bytecode cannot prove its use; uncertainty is retained, without a security certification."
+      }
     }
   ]
 }

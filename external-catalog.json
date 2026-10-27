@@ -366,6 +366,84 @@
         "sourceCommit": "77b0939c36d99e8e1e2d4ed69c95018a3f115b84",
         "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
       }
+    },
+    {
+      "id": "external-org.isoron.uhabits",
+      "packageName": "org.isoron.uhabits",
+      "name": "Loop Habit Tracker",
+      "description": "Suivez vos habitudes et vos objectifs avec des rappels, un calendrier et des statistiques. Application utilisable hors ligne, sans compte.",
+      "category": "Habitudes",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/iSoron/uhabits",
+      "external": true,
+      "author": "Álinson S. Xavier et les contributeurs Loop",
+      "popularity": {
+        "githubStars": 10365,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "org.isoron.uhabits",
+        "versionCode": 20302,
+        "versionName": "2.3.2",
+        "name": "Habitudes",
+        "minSdk": 28,
+        "signers": [
+          "b2f2fa6f868b1e0aa03fb8084fbc1b0ffc353d9cf9826c8b40cfff0ed0804b0a"
+        ],
+        "sha256": "7090577c85180109b218add5faceaf29344666045df51728abbdff219acbc112",
+        "size": 10665578,
+        "id": "iSoron/uhabits@v2.3.2",
+        "downloadUrl": "https://github.com/iSoron/uhabits/releases/download/v2.3.2/loop-2.3.2-release.apk",
+        "assetId": 651068375,
+        "assetName": "loop-2.3.2-release.apk",
+        "publishedAt": 1792257272000
+      },
+      "releaseUrl": "https://github.com/iSoron/uhabits/releases/tag/v2.3.2",
+      "review": {
+        "date": "2026-10-27",
+        "version": "2.3.2",
+        "sourceCommit": "7afc799cfb6959f8a9d892417d6427a262bfb13a",
+        "scope": "Réexamen statique ciblé, signature et empreinte ; pas de certification de sécurité ni de test sur téléphone."
+      }
+    },
+    {
+      "id": "external-com.shatteredpixel.shatteredpixeldungeon",
+      "packageName": "com.shatteredpixel.shatteredpixeldungeon",
+      "name": "Shattered Pixel Dungeon",
+      "description": "Explorez des donjons générés aléatoirement, choisissez votre héros et améliorez son équipement. Jeu de rôle au tour par tour, jouable hors ligne.",
+      "category": "Jeux de rôle",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/00-Evan/shattered-pixel-dungeon",
+      "external": true,
+      "author": "Shattered Pixel et les contributeurs",
+      "popularity": {
+        "githubStars": 6724,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.shatteredpixel.shatteredpixeldungeon",
+        "versionCode": 922,
+        "versionName": "4.0.2",
+        "name": "Shattered Pixel Dungeon",
+        "minSdk": 21,
+        "signers": [
+          "d45f760b89608b4b253a3b160dc2707f1ff4e8dd8ca4d2e8e1b81c2c72d81753"
+        ],
+        "sha256": "ceef4cdd4beddcb3d85379ac004cb4ab5d918b89dc7366b4ce9c4a3585a5e78e",
+        "size": 30275058,
+        "id": "00-Evan/shattered-pixel-dungeon@v4.0.2",
+        "downloadUrl": "https://github.com/00-Evan/shattered-pixel-dungeon/releases/download/v4.0.2/ShatteredPD-v4.0.2-Android.apk",
+        "assetId": 619169654,
+        "assetName": "ShatteredPD-v4.0.2-Android.apk",
+        "publishedAt": 1791389630000
+      },
+      "releaseUrl": "https://github.com/00-Evan/shattered-pixel-dungeon/releases/tag/v4.0.2",
+      "review": {
+        "date": "2026-10-27",
+        "version": "4.0.2",
+        "sourceCommit": "57a4e06a4caf162446d1c28caa7983f0493fecf0",
+        "scope": "Réexamen statique ciblé, signature et empreinte ; pas de certification de sécurité ni de test sur téléphone."
+      }
     }
   ]
 }

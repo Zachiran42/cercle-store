@@ -50,6 +50,24 @@ Lecture du manifeste, des règles réseau, des dépendances et de Prefs.java. La
 
 Lecture du manifeste, des dépendances et des fonctions de téléchargement/extraction de mods de GithubAPI.kt. Le chemin utilisé contrôle les noms d’entrées ZIP par chemin canonique et refuse la sortie du répertoire de destination. Un ancien utilitaire Zip.kt sans ce contrôle a aussi été trouvé ; la recherche dans l’instantané n’a pas trouvé d’appel à cet utilitaire en dehors de sa récursion interne. Ce constat est limité à l’arbre examiné. Les mods restent des contenus tiers choisis par l’utilisateur. Aucun avis OSV sur les dépendances Maven identifiées. Licence MPL-2.0 confirmée dans LICENSE.
 
+### Loop Habit Tracker 2.3.2 — retenu après réexamen
+
+[Source exacte](https://github.com/iSoron/uhabits/tree/7afc799cfb6959f8a9d892417d6427a262bfb13a) — [APK et publication](https://github.com/iSoron/uhabits/releases/tag/v2.3.2).
+
+La mise en attente initiale était trop conservatrice pour le périmètre Android examiné. Le manifeste ne demande pas Internet et l’APK ne contient aucune bibliothèque native. L’inspection des tables de types/méthodes de son unique DEX (6 153 classes) n’a trouvé ni référence à ObjectInputStream, ni méthode de désérialisation Java correspondante, ni chaîne de réflexion désignant cette classe. La revue des imports GenericImporter et ImportDataTask montre des imports CSV/SQLite, pas une entrée de sérialisation Java.
+
+Commons IO 1.3.2 est limité aux tests JVM. Les usages applicatifs recherchés de Commons Lang concernent notamment la jointure de chaînes et les paires ; aucun appel à ClassUtils.getClass, méthode de l’avis [GHSA-j288-q9x7-2f5v](https://github.com/advisories/GHSA-j288-q9x7-2f5v), n’a été trouvé dans ces sources. La précondition de désérialisation de [GHSA-xxph-c9ww-hj94](https://github.com/advisories/GHSA-xxph-c9ww-hj94) n’a pas été identifiée dans cet APK. Les alertes de dépendances sont conservées pour le suivi ; ce constat n’est pas une preuve universelle d’inaccessibilité par réflexion, ni une validation des versions futures. Variante release officielle revérifiée : signature et digest inchangés. Décision de catalogue révisée : retenu.
+
+### Shattered Pixel Dungeon 4.0.2 — retenu après réexamen
+
+[Source exacte](https://github.com/00-Evan/shattered-pixel-dungeon/tree/57a4e06a4caf162446d1c28caa7983f0493fecf0) — [APK et publication](https://github.com/00-Evan/shattered-pixel-dungeon/releases/tag/v4.0.2).
+
+Ajout demandé explicitement par le propriétaire du catalogue. L’APK Android autonome officiel a été contrôlé à nouveau : signature valide, digest GitHub inchangé, paquet et version cohérents. Il ne s’agit pas d’un APK recompilé par Cercle, ni d’une validation basée seulement sur sa présence dans Google Play.
+
+Le code de Bundle.java explique qu’Android fournit sa propre version de org.json. Cela rend la simple correspondance Maven insuffisante pour affirmer que le binaire Android est affecté. Il faut cependant garder la nuance : l’APK est optimisé/obfusqué et l’inspection des noms de types ne permet pas de prouver quelle implémentation JSON est exécutée. L’hypothèse d’un faux positif n’est donc pas présentée comme un fait établi.
+
+Les avis [GHSA-3vqj-43w4-2q58](https://github.com/advisories/GHSA-3vqj-43w4-2q58) et [GHSA-4jq9-2xhw-jpx7](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7) sont conservés dans les métadonnées de revue comme points de suivi. Aucun exploit Android ou comportement malveillant du jeu n’a été établi ici. Décision de catalogue : retenu à la demande du propriétaire, avec revue limitée et incertitude documentée, sans certification d’absence de vulnérabilité.
+
 ## Versions différées
 
 Une mise en attente n’est pas une accusation de comportement malveillant, ni la preuve qu’une attaque est possible dans toutes les configurations. C’est un choix conservateur de catalogue tant que ces points restent non résolus dans cette revue.
@@ -58,23 +76,15 @@ Une mise en attente n’est pas une accusation de comportement malveillant, ni l
 
 La signature de l’APK correspond au certificat publié dans son README. La correction de l’ancienne désérialisation dangereuse est présente dans PreferencesObjectInputStream.kt : liste de types autorisés ; [avis historique corrigé à partir de 0.27.0](https://github.com/TeamNewPipe/NewPipe/security/advisories/GHSA-wxrm-jhpf-vp6v).
 
-La version déclare toutefois jsoup 1.22.2, concerné par [GHSA-65r4-943x-97jj](https://github.com/advisories/GHSA-65r4-943x-97jj). SrtFromTtmlWriter.java appelle Parser.xmlParser pour des sous-titres. L’impact exact dans l’APK n’a pas été testé : version différée en attendant une version corrigée ou une analyse complémentaire. Une autre alerte jsoup de nettoyage HTML est conservée dans le relevé sans conclure à son exploitation ici.
+La version déclare toutefois jsoup 1.22.2, concerné par [GHSA-65r4-943x-97jj](https://github.com/advisories/GHSA-65r4-943x-97jj). SrtFromTtmlWriter.java appelle Parser.xmlParser pour des sous-titres. Le second examen confirme que la dernière publication stable est inchangée et que le chemin XML est appelé pour les sous-titres. Un test de la bibliothèque jsoup 1.22.2 officielle, dans une JVM limitée à 64 Mio, a épuisé le tas avec un document synthétique de 102 793 caractères. Ce test ne porte pas sur l’APK Android et ne prouve pas une exploitation sur téléphone ; il étaye le maintien en attente. Une autre alerte jsoup de nettoyage HTML est conservée dans le relevé sans conclure à son exploitation ici.
 
 ### FairEmail 1.2339
 
-WebViewEx.java désactive JavaScript et l’accès aux fichiers, et conditionne le chargement réseau des images au choix de l’utilisateur. Mais jsoup 1.23.1 figure dans les dépendances actives et TextHelper.formatXml, appelé pour des rapports DMARC, utilise le parseur XML concerné par [GHSA-65r4-943x-97jj](https://github.com/advisories/GHSA-65r4-943x-97jj). Des alertes Guava et POI restent également à qualifier. Les nombreuses correspondances Jackson initiales ont été écartées : déclarations commentées et exclusions explicites dans le build. Version différée sans preuve d’exploitation dynamique.
-
-### Loop Habit Tracker 2.3.2
-
-L’APK ne demande pas Internet. Commons IO 1.3.2 est utilisé dans les tests JVM, donc son alerte ne justifie pas de qualifier l’APK vulnérable. Commons Lang 3.14.0 et Guava 33.2.1-android restent déclarés dans le code de production : [GHSA-j288-q9x7-2f5v](https://github.com/advisories/GHSA-j288-q9x7-2f5v), [GHSA-xxph-c9ww-hj94](https://github.com/advisories/GHSA-xxph-c9ww-hj94). Les chemins de désérialisation Java et ClassUtils.getClass nécessaires à ces avis n’ont pas été trouvés dans les sources applicatives recherchées ; cela n’est pas une preuve d’inaccessibilité dans l’ensemble des dépendances. Décision conservatrice : différer jusqu’à mise à jour ou analyse de portée plus complète.
-
-### Shattered Pixel Dungeon 4.0.2
-
-Signature et empreinte de l’APK valides. Le module partagé SPD-classes déclare org.json:json:20170516, correspondant à [GHSA-3vqj-43w4-2q58](https://github.com/advisories/GHSA-3vqj-43w4-2q58) et [GHSA-4jq9-2xhw-jpx7](https://github.com/advisories/GHSA-4jq9-2xhw-jpx7). L’impact Android n’est pas établi : Android fournit aussi org.json et le binaire est optimisé/obfusqué ; la recherche de noms de classes dans le DEX n’a pas suffi à attribuer la bibliothèque réellement exécutée. Version différée pour ce point non résolu, sans affirmer que l’APK est exploitable.
+WebViewEx.java désactive JavaScript et l’accès aux fichiers, et conditionne le chargement réseau des images au choix de l’utilisateur. Mais jsoup 1.23.1 figure dans les dépendances actives et TextHelper.formatXml, appelé pour des rapports DMARC, utilise le parseur XML concerné par [GHSA-65r4-943x-97jj](https://github.com/advisories/GHSA-65r4-943x-97jj). Des alertes Guava et POI restent également à qualifier. Les nombreuses correspondances Jackson initiales ont été écartées : déclarations commentées et exclusions explicites dans le build. Le second examen confirme la version stable inchangée et le chemin ActivityDMARC → TextHelper.formatXml, qui charge puis analyse le document. Un test de jsoup 1.23.1 officiel dans une JVM limitée à 64 Mio reproduit un épuisement du tas avec le même document synthétique de 102 793 caractères. Aucun essai sur l’APK Android ; mise en attente maintenue.
 
 ## Publication et mises à jour
 
-Les six versions retenues rejoignent les quatre fiches externes existantes. Les dix APK restent sur les Releases de leurs auteurs ; ils ne sont pas copiés ni recompilés par Cercle. Les mentions « application externe, non créée par Cercle » et les auteurs restent visibles.
+Après réexamen, huit versions sont retenues parmi les dix examinées et rejoignent les quatre fiches externes précédentes. Les douze APK restent sur les Releases de leurs auteurs ; ils ne sont pas copiés ni recompilés par Cercle. Les mentions « application externe, non créée par Cercle » et les auteurs restent visibles.
 
 Cette revue porte seulement sur les versions et commits indiqués. La recherche automatique de mises à jour dans Cercle contrôle le dépôt, l’identité, la version et le certificat du nouvel APK ; elle ne réalise pas une nouvelle revue de code de chaque version future.
 

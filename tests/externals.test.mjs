@@ -18,8 +18,8 @@ test('site : URLs limitées au dépôt officiel et filtres distincts des créati
  context.app=app;assert.equal(vm.runInContext('matches(app,"Applications externes")',context),true);assert.equal(vm.runInContext('matches(app,"Créations du Cercle")',context),false);
 });
 
-test('publication conditionnelle : seules les six décisions retenues rejoignent le catalogue',()=>{
+test('publication conditionnelle : seules les décisions retenues rejoignent le catalogue',()=>{
  const review=JSON.parse(fs.readFileSync(path.join(root,'external-reviews.json'),'utf8'));
- assert.equal(review.reviews.length,10);assert.equal(review.reviews.filter(r=>r.decision==='retained').length,6);
+ assert.equal(review.reviews.length,10);assert.equal(review.reviews.filter(r=>r.decision==='retained').length,8);
  for(const r of review.reviews){const app=input.apps.find(a=>a.sourceUrl==='https://github.com/'+r.repository);if(r.decision==='deferred'){assert.equal(app,undefined);continue;}assert.ok(app);assert.equal(app.release.sha256,r.apkSha256);assert.equal(app.release.versionName,r.version);assert.deepEqual(app.release.signers,r.signers);assert.equal(app.review.sourceCommit,r.sourceCommit);}
 });
