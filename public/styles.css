@@ -3,3 +3,5 @@
 input[type=checkbox]{width:18px;height:18px;min-height:18px;vertical-align:middle;margin-right:8px;accent-color:var(--green)}hr{border:0;border-top:1px solid var(--line);margin:25px 0}
 
 @media(max-width:650px){.welcome .hero .orb{display:none}.welcome .hero h1{font-size:32px;letter-spacing:-1.2px}}
+
+.app-card .badge{margin-bottom:10px}.app-card .origin-author{margin:0 0 12px;font-size:12px}.app-card>p{margin-top:4px}

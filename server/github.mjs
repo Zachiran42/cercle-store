@@ -3,6 +3,7 @@ import path from 'node:path';
 import {createHash, createPrivateKey, createPublicKey, sign} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {inspectApk} from './apk.mjs';
+import {readExternalCatalog} from './externals.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function updateReadmeDownload(root,release,version){
  const file=path.join(root,'README.md');if(!fs.existsSync(file))return false;
@@ -54,14 +55,15 @@ export async function preparePublication({root,dataDir,db,tools}){
  }
  await append({name:'Cercle',description:'Le petit store pour retrouver les applications de votre proche.',category:'Le store',license:'MIT',sourceUrl:'https://github.com/'+config.repository},store,storeApk,true);
  const revision=Math.max(Date.now(),(db.githubRevision||0)+1);
- const catalog={schema:2,revision,name:'Cercle',repository:config.repository,generatedAt:Date.now(),apps};
+ const externalApps=readExternalCatalog(root,apps);
+ const catalog={schema:2,revision,name:'Cercle',repository:config.repository,generatedAt:Date.now(),apps,externalApps};
  const payload=Buffer.from(JSON.stringify(catalog));
  const envelope={payload:payload.toString('base64'),signature:sign('sha256',payload,key).toString('base64')};
  fs.writeFileSync(path.join(pages,'catalog.json'),JSON.stringify(envelope));
  fs.writeFileSync(path.join(pages,'store.json'),JSON.stringify({name:'Cercle',repository:config.repository,apkUrl:releases.find(r=>r.isStore).url,catalogUrl:config.pagesUrl+'catalog.json',publicKey:config.publicKey}));
  for(const [source,name] of [['github.html','index.html'],['github.js','catalog.js'],['styles.css','styles.css'],['mark.svg','mark.svg']]){const origin=path.join(root,'public',source),destination=path.join(pages,name);if(name==='index.html'){const html=fs.readFileSync(origin,'utf8').replace('./styles.css','./styles.css?v='+revision).replace('./catalog.js','./catalog.js?v='+revision);fs.writeFileSync(destination,html);}else fs.copyFileSync(origin,destination);}
  fs.writeFileSync(path.join(pages,'.nojekyll'),'');
- const manifest={repository:config.repository,pagesUrl:config.pagesUrl,revision,apps:apps.length-1,releases,preparedAt:Date.now()};
+ const manifest={repository:config.repository,pagesUrl:config.pagesUrl,revision,apps:apps.length-1,externalApps:externalApps.length,releases,preparedAt:Date.now()};
  fs.writeFileSync(path.join(output,'publication.json'),JSON.stringify(manifest,null,2));
  return {config,output,pages,manifest};
 }
@@ -80,7 +82,7 @@ export async function publishGitHub({root,prepared,tools}){
  const branch=repository.default_branch||'main';if(!/^[A-Za-z0-9._/-]+$/.test(branch))throw new Error('Nom de branche non pris en charge.');
  let head=null;try{head=await api('repos/'+config.repository+'/git/ref/heads/'+encodeURIComponent(branch));}catch(error){if(!/404|409|empty|Not Found/i.test(error.message))throw error;}
  if(head){let existing;try{existing=await api('repos/'+config.repository+'/contents/github-store.json?ref='+encodeURIComponent(branch));}catch{throw new Error('Ce dépôt contient déjà un autre projet. Choisissez un nouveau dépôt pour Cercle.');}const remote=JSON.parse(Buffer.from(existing.content,'base64').toString('utf8'));if(remote.publicKey!==config.publicKey||remote.repository!==config.repository)throw new Error('Le dépôt existant ne correspond pas à la clé de ce store.');}
- const allowed=['android','server','public','scripts','tests','package.json','README.md','VALIDATION.md','LICENSE','.gitignore','.toolchain.example.json','github-store.json','DEMARRER.cmd','CONNECTER-GITHUB.cmd'];
+ const allowed=['android','server','public','scripts','tests','package.json','README.md','VALIDATION.md','LICENSE','.gitignore','.toolchain.example.json','github-store.json','external-catalog.json','DEMARRER.cmd','CONNECTER-GITHUB.cmd'];
  function sourceFiles(){const files=[];function walk(item){const full=path.join(root,item),stat=fs.lstatSync(full);if(stat.isSymbolicLink())throw new Error('Lien symbolique refusé dans les sources.');if(stat.isDirectory()){for(const name of fs.readdirSync(full))walk(item+'/'+name);}else files.push(item.replaceAll('\\','/'));}for(const item of allowed)if(fs.existsSync(path.join(root,item)))walk(item);return files;}
  async function commit(files,message,includePages){const entries=[];for(const file of files){const bytes=fs.readFileSync(path.join(root,file));if(/-{5}BEGIN (?:EC |RSA |OPENSSH )?PRIVATE KEY-{5}/.test(bytes.toString('utf8')))throw new Error('Une clé privée a été détectée dans les sources.');const blob=await api('repos/'+config.repository+'/git/blobs','POST',{content:bytes.toString('base64'),encoding:'base64'});entries.push({path:file,mode:'100644',type:'blob',sha:blob.sha});}if(includePages)for(const name of fs.readdirSync(prepared.pages)){const blob=await api('repos/'+config.repository+'/git/blobs','POST',{content:fs.readFileSync(path.join(prepared.pages,name)).toString('base64'),encoding:'base64'});entries.push({path:'docs/'+name,mode:'100644',type:'blob',sha:blob.sha});}
   const baseTree=head?(await api('repos/'+config.repository+'/git/commits/'+head.object.sha)).tree.sha:undefined;

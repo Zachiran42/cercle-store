@@ -6,6 +6,7 @@ test('vérification fraîche du catalogue : signature, cache HTTP et révisions 
  const temp=fs.mkdtempSync(path.join(root,'build','catalog-refresh-'));
  try{
  const files={
+ 'fr/zachiran/cercle/CatalogApps.java':'package fr.zachiran.cercle;import org.json.JSONObject;class CatalogApps{static String repository(JSONObject a){throw new AssertionError();}}',
  'android/content/Context.java':'package android.content;public class Context{public fr.zachiran.cercle.Access.Prefs prefs=new fr.zachiran.cercle.Access.Prefs();}',
  'android/util/Base64.java':'package android.util;public class Base64{public static final int NO_WRAP=0;public static byte[] decode(String s,int flag){return java.util.Base64.getDecoder().decode(s);}}',
  'fr/zachiran/cercle/Access.java':'package fr.zachiran.cercle;import java.util.*;public class Access{static Prefs prefs(android.content.Context c){return c.prefs;}public static class Prefs{Map<String,Object> values=new java.util.concurrent.ConcurrentHashMap<>();long getLong(String k,long fallback){Object v=values.get(k);return v==null?fallback:((Number)v).longValue();}String getString(String k,String fallback){Object v=values.get(k);return v==null?fallback:(String)v;}Editor edit(){return new Editor(this);}}static class Editor{Prefs prefs;Map<String,Object> changes=new HashMap<>();Editor(Prefs p){prefs=p;}Editor putLong(String k,long v){changes.put(k,v);return this;}Editor putString(String k,String v){changes.put(k,v);return this;}void apply(){prefs.values.putAll(changes);}}}',

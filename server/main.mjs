@@ -40,7 +40,7 @@ export function createStore(options = {}) {
   if (db.schema !== 1) throw new Error('Version de données non prise en charge.');
   let githubBusy = false;
   const githubConfig = () => { try { return readConfig(root); } catch { return null; } };
-  const catalogFingerprint = () => hash(JSON.stringify({apps:db.apps,releases:db.releases}));
+  const catalogFingerprint = () => hash(JSON.stringify({apps:db.apps,releases:db.releases,externalCatalog:existsSync(path.join(root,"external-catalog.json"))?hash(readFileSync(path.join(root,"external-catalog.json"))):null}));
   const privateKey = createPrivateKey(readFileSync(path.join(dataDir, 'catalog-private.pem')));
   let tools = options.tools;
   const toolFile = options.toolFile || process.env.CERCLE_TOOLCHAIN || path.join(root, '.toolchain.json');

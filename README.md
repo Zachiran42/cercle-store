@@ -1,4 +1,4 @@
-# Cercle 0.3.3 — édition GitHub gratuite
+# Cercle 0.3.4 — édition GitHub gratuite
 
 Cette édition publie le catalogue sur **GitHub Pages** et les APK sur **GitHub Releases**. Le site et les téléchargements sont publics. Les proches n'ont besoin ni de GitHub ni d'un compte : ils installent Cercle, ouvrent les fiches et suivent les confirmations Android.
 
@@ -9,9 +9,22 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 27 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue : Lisière Compact 1.5.0 et Noël Sucré 1.2.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
-- APK **0.3.3 de test**, versionCode 8, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
+- Catalogue du Cercle : Lisière Compact 1.5.0, Noël Sucré 1.2.0 et Boucle 1.1.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- APK **0.3.4 de test**, versionCode 9, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Catalogues externes — version 0.3.4
+
+Les filtres **Créations du Cercle** et **Applications externes**, puis les catégories thématiques, permettent de choisir le catalogue à explorer. Les applications externes portent la mention **Application externe — non créée par Cercle** avec leur auteur, sur Android et sur le site.
+
+- **LocalSend 1.18.2** — Partage de fichiers ; L’équipe LocalSend. [Apache-2.0](https://github.com/localsend/localsend). 96 039 étoiles GitHub relevées le 2026-10-27.
+- **Aegis Authenticator 3.4.3** — Sécurité ; Beem Development. [GPL-3.0](https://github.com/beemdevelopment/Aegis). 13 401 étoiles GitHub relevées le 2026-10-27.
+- **Fossify Gallery 1.14.1** — Photos ; Fossify. [GPL-3.0](https://github.com/FossifyOrg/Gallery). 3 854 étoiles GitHub relevées le 2026-10-27.
+- **Markor 2026.10.0** — Notes et listes ; Gregor Santner et les contributeurs Markor. [Apache-2.0 ; traductions et exemples CC0-1.0](https://github.com/gsantner/markor). 6 338 étoiles GitHub relevées le 2026-10-27.
+
+Les étoiles sont un indicateur de popularité, pas une note sur cinq ni une garantie de qualité ou de sécurité. La sélection retient des projets publics non archivés, avec une publication stable, une licence identifiée et un APK officiel autonome. Les APK référencés ont été téléchargés et contrôlés avec apksigner et aapt : paquet, version, taille, empreinte et certificat. Les fichiers restent sur les Releases des auteurs et sont téléchargés directement chez eux ; ils ne sont ni recompilés ni copiés dans les Releases de Cercle. Aucun essai de ces applications sur téléphone n’a été effectué ici.
+
+Le catalogue externe public est déclaré dans **external-catalog.json**, validé avant publication et inclus dans le champ **externalApps** du catalogue signé. Les anciens clients continuent à lire uniquement **apps** et peuvent mettre Cercle à jour ; le client 0.3.4 affiche ensuite les deux catalogues. L’auteur et la provenance restent visibles après les mises à jour directes. Les variantes universelles sont conservées lors du suivi.
 
 ## Mise à jour de Cercle — version 0.3.2
 
@@ -140,7 +153,7 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.3/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.4/Cercle.apk)
 
-Version actuelle : **0.3.3**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.3.4**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->

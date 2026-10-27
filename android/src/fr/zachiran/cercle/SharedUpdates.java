@@ -26,7 +26,7 @@ final class SharedUpdates {
   return Packages.hex(MessageDigest.getInstance("SHA-256").digest(value.getBytes("UTF-8")));
  }
  static JSONObject trusted(Context c,String pkg)throws Exception{
-  JSONObject catalog=Api.cached(c);JSONObject base=catalog==null?null:PersonalApps.find(catalog.getJSONArray("apps"),pkg);
+  JSONObject catalog=Api.cached(c);JSONObject base=catalog==null?null:PersonalApps.find(CatalogApps.all(catalog),pkg);
   if(base==null)throw new IOException("Cette application a été retirée du catalogue. Actualisez-le.");
   repository(c,base);return base;
  }
@@ -52,7 +52,7 @@ final class SharedUpdates {
   return true;
  }
  static JSONObject select(JSONArray choices,JSONObject old,JSONObject base)throws Exception{
-  JSONObject selected=null;String family=old==null?"":GitHubSourcePolicy.family(old.getJSONObject("release").getString("assetName"));
+  JSONObject selected=null;String name=old==null?base.getJSONObject("release").optString("assetName"):old.getJSONObject("release").getString("assetName");String family=name.isEmpty()?"":GitHubSourcePolicy.family(name);
   for(int i=0;i<choices.length();i++){JSONObject a=choices.getJSONObject(i);boolean match=!family.isEmpty()?family.equals(GitHubSourcePolicy.family(a.getString("name"))):("sha256:"+base.getJSONObject("release").getString("sha256")).equals(a.optString("digest"));
    if(match){if(selected!=null)throw new IOException("Plusieurs variantes APK correspondent à cette application.");selected=a;}}
   if(selected==null&&family.isEmpty()&&choices.length()==1)selected=choices.getJSONObject(0);

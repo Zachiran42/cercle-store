@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "apps": [
+    {
+      "id": "external-org.localsend.localsend_app",
+      "packageName": "org.localsend.localsend_app",
+      "name": "LocalSend",
+      "description": "Partagez des fichiers et des photos entre téléphone et ordinateur sur le même réseau local, sans compte.",
+      "category": "Partage de fichiers",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/localsend/localsend",
+      "external": true,
+      "author": "L’équipe LocalSend",
+      "popularity": {
+        "githubStars": 96039,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "org.localsend.localsend_app",
+        "versionCode": 64,
+        "versionName": "1.18.2",
+        "name": "LocalSend",
+        "minSdk": 24,
+        "signers": [
+          "bb3ee28239b1418af16ddc647d5a948a573c2d136d2b74bce47e9d8e2335304e"
+        ],
+        "sha256": "ca08306fbedad33790efa02240bc530c3f248e69a1a1ea780fa553f68202f436",
+        "size": 128293112,
+        "id": "localsend/localsend@v1.18.2",
+        "downloadUrl": "https://github.com/localsend/localsend/releases/download/v1.18.2/LocalSend-1.18.2-android-google-play.apk",
+        "assetId": 523808324,
+        "assetName": "LocalSend-1.18.2-android-google-play.apk",
+        "publishedAt": 1787320921000
+      },
+      "releaseUrl": "https://github.com/localsend/localsend/releases/tag/v1.18.2"
+    },
+    {
+      "id": "external-com.beemdevelopment.aegis",
+      "packageName": "com.beemdevelopment.aegis",
+      "name": "Aegis Authenticator",
+      "description": "Gérez vos codes de double authentification et organisez vos comptes. Coffre chiffré et sauvegardes proposés par l’application.",
+      "category": "Sécurité",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/beemdevelopment/Aegis",
+      "external": true,
+      "author": "Beem Development",
+      "popularity": {
+        "githubStars": 13401,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.beemdevelopment.aegis",
+        "versionCode": 82,
+        "versionName": "3.4.3",
+        "name": "Aegis",
+        "minSdk": 23,
+        "signers": [
+          "c6db80a8e14e5230c1de8415ef820d13dc901d8fe33cf3acb57b6862d858a823"
+        ],
+        "sha256": "fa091c91912c0d56ec3553394fac4158f9a9d178e93bcbb35419601d788cb528",
+        "size": 6881897,
+        "id": "beemdevelopment/Aegis@v3.4.3",
+        "downloadUrl": "https://github.com/beemdevelopment/Aegis/releases/download/v3.4.3/aegis-v3.4.3.apk",
+        "assetId": 547056786,
+        "assetName": "aegis-v3.4.3.apk",
+        "publishedAt": 1788690672000
+      },
+      "releaseUrl": "https://github.com/beemdevelopment/Aegis/releases/tag/v3.4.3"
+    },
+    {
+      "id": "external-org.fossify.gallery",
+      "packageName": "org.fossify.gallery",
+      "name": "Fossify Gallery",
+      "description": "Parcourez et organisez vos photos et vidéos avec une galerie libre.",
+      "category": "Photos",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/FossifyOrg/Gallery",
+      "external": true,
+      "author": "Fossify",
+      "popularity": {
+        "githubStars": 3854,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "org.fossify.gallery",
+        "versionCode": 30,
+        "versionName": "1.14.1",
+        "name": "Galerie",
+        "minSdk": 26,
+        "signers": [
+          "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292"
+        ],
+        "sha256": "9a9f2e06882abfdae6f4c86aeaa83ae8102b2e081591df0eb2134a6f629657c7",
+        "size": 38538587,
+        "id": "FossifyOrg/Gallery@1.14.1",
+        "downloadUrl": "https://github.com/FossifyOrg/Gallery/releases/download/1.14.1/gallery-30-foss-release.apk",
+        "assetId": 672395442,
+        "assetName": "gallery-30-foss-release.apk",
+        "publishedAt": 1792850056000
+      },
+      "releaseUrl": "https://github.com/FossifyOrg/Gallery/releases/tag/1.14.1"
+    },
+    {
+      "id": "external-net.gsantner.markor",
+      "packageName": "net.gsantner.markor",
+      "name": "Markor",
+      "description": "Prenez des notes et préparez des listes dans des fichiers texte ou Markdown, utilisables hors ligne.",
+      "category": "Notes et listes",
+      "license": "Apache-2.0 ; traductions et exemples CC0-1.0",
+      "sourceUrl": "https://github.com/gsantner/markor",
+      "external": true,
+      "author": "Gregor Santner et les contributeurs Markor",
+      "popularity": {
+        "githubStars": 6338,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "net.gsantner.markor",
+        "versionCode": 164,
+        "versionName": "2026.10.0",
+        "name": "Markor",
+        "minSdk": 21,
+        "signers": [
+          "57d106d0cfa8763442b3645ef2741c38bb820bd56fd4612bf40a23b6d998be5e"
+        ],
+        "sha256": "c105bf5cc9530f7486b984323a185c17086b459a56ec936a5990ceb8da3d8440",
+        "size": 11861047,
+        "id": "gsantner/markor@v2026.10.0",
+        "downloadUrl": "https://github.com/gsantner/markor/releases/download/v2026.10.0/net.gsantner.markor-v164-2026.10.0-flavorDefault-release.apk",
+        "assetId": 676162242,
+        "assetName": "net.gsantner.markor-v164-2026.10.0-flavorDefault-release.apk",
+        "publishedAt": 1792963403000
+      },
+      "releaseUrl": "https://github.com/gsantner/markor/releases/tag/v2026.10.0"
+    }
+  ]
+}

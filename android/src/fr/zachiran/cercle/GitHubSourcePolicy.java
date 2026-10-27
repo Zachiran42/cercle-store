@@ -38,6 +38,6 @@ public final class GitHubSourcePolicy {
    if((tag+file).matches("(?s).*[\\x00-\\x1f\\x7f\\\\].*")||!encode(tag).equals(parts[0])||!encode(file).equals(parts[1]))throw new Exception();
   }catch(Exception e){throw new IOException("Lien APK invalide.");}
  }
- /** Keep architecture and flavor; only replace dotted version numbers. */
- public static String family(String file){return file.toLowerCase(Locale.ROOT).replaceAll("v?[0-9]+(?:\\.[0-9]+)+(?:[-._]?(?:beta|alpha|rc)[0-9]*)?","{version}");}
+ /** Keep architecture and flavor; normalize version/build tokens without erasing ABI names. */
+ public static String family(String file){return file.toLowerCase(Locale.ROOT).replaceAll("(?<=-)v?[0-9]+(?=-)","{build}").replaceAll("v?[0-9]+(?:\\.[0-9]+)+(?:[-._]?(?:beta|alpha|rc)[0-9]*)?","{version}");}
 }

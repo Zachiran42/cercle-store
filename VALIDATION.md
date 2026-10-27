@@ -1,6 +1,6 @@
-# Vérification de Cercle 0.3.3 — 27 octobre 2026
+# Vérification de Cercle 0.3.4 — 27 octobre 2026
 
-- Version Android 0.3.3, versionCode 8, minimum Android 8 (API 26).
+- Version Android 0.3.4, versionCode 9, minimum Android 8 (API 26).
 - Ajout personnel depuis un dépôt GitHub public : recherche d’une publication stable, ou d’une préversion si aucune version stable n’est disponible ; choix du fichier APK si nécessaire ; téléchargement pour inspection ; aperçu puis confirmation explicite de l’ajout.
 - Les fiches sont enregistrées dans les préférences privées de Cercle sur ce téléphone, séparément du catalogue partagé. Aucun ajout personnel n’est envoyé au serveur d’administration, au catalogue Pages ou au dépôt du propriétaire du store.
 - Les demandes réseau de recherche et de téléchargement sont envoyées à GitHub, sans jeton ni connexion GitHub. GitHub reçoit nécessairement les requêtes des dépôts consultés.
@@ -9,7 +9,7 @@
 - Le suivi des ajouts personnels consulte uniquement les métadonnées des publications. Les APK des nouvelles publications sont téléchargés quand l’utilisateur demande leur vérification/installation ; les comparaisons de version reposent alors sur le contenu réel de l’APK.
 - Si plusieurs variantes APK existent, le suivi conserve la famille de nom sélectionnée. Une sélection ambiguë ne bascule pas silencieusement vers une autre variante ; l’utilisateur peut rechercher et sélectionner une publication depuis la fiche.
 - Le retrait d’une fiche personnelle arrête son suivi sans désinstaller l’application.
-- 34 tests automatisés : serveur, catalogue signé, publication GitHub simulée et code Java. Le test des ajouts personnels exécute plus de 50 contrôles avec services Android et réponses GitHub simulés : isolation entre utilisateurs, confirmation avant sauvegarde, persistance, fusion sans écrasement du catalogue partagé, cache, empreinte incorrecte, changement de paquet/certificat, APK fractionné, blocage d’une autre source pour Cercle, nouvelles publications, variantes, limitations GitHub, suppression et fiches périmées.
+- 37 tests automatisés : serveur, catalogue signé, publication GitHub simulée et code Java. Le test des ajouts personnels exécute plus de 50 contrôles avec services Android et réponses GitHub simulés : isolation entre utilisateurs, confirmation avant sauvegarde, persistance, fusion sans écrasement du catalogue partagé, cache, empreinte incorrecte, changement de paquet/certificat, APK fractionné, blocage d’une autre source pour Cercle, nouvelles publications, variantes, limitations GitHub, suppression et fiches périmées.
 - Dépendance JSON de test téléchargée depuis Maven Central et vérifiée par SHA-256 ; elle est utilisée uniquement sur JVM pour les tests, jamais embarquée dans l’APK.
 - Signature APK v2/v3, certificat de mise à jour et clé publique de catalogue contrôlés lors de la compilation/publication.
 - Limite : aucun téléphone ni émulateur Android connecté ici. Le rendu natif, le sélecteur d’APK, les confirmations d’installation et l’ouverture des applications restent à confirmer sur téléphone.
@@ -29,3 +29,6 @@
 
 - Version 0.3.3 : tests du code SharedUpdates réel avec services Android et réponses GitHub simulés : détection sans télécharger les APK, conservation des métadonnées signées, identité et certificat épinglés, indépendance des ajouts personnels, persistance, refus d’APK fractionné, version égale/ancienne traitée une seule fois, absence de régression après inspection, limites GitHub, publication absente, variantes, invalidation par un nouveau catalogue ou retrait d’une application, protection spécifique de Cercle.
 - Lisière 1.5.0 : versionCode 7, APK SHA-256 8a7b6dd29c9af4cd33d04ffc3d1d09ac8112b0e210fc5962c1f2ce41ee19f85f, même certificat Compact. Notices MIT et tierces contrôlées. Aucun essai sur téléphone.
+
+- Version 0.3.4 : sélection publique externe (LocalSend, Aegis Authenticator, Fossify Gallery, Markor), auteur et mention « non créée par Cercle » visibles ; popularité datée distincte d’une note de qualité. APK officiels inspectés, sans copie dans les Releases du store. Variantes universelles vérifiées ; empreinte Aegis également comparée au certificat publié dans son README.
+- Catalogue externe signé dans un champ séparé pour préserver les clients précédents. Tests des doublons, sources et liens non officiels, empreintes invalides, certificats modifiés, séparation des filtres, téléchargement natif depuis la source attendue et suivi d’une nouvelle publication externe. Site vérifié visuellement dans le navigateur : filtre des quatre applications externes, auteur, provenance officielle et mention « non créée par Cercle » sur la fiche. APK Android compilé et signé, aucun essai sur téléphone.
