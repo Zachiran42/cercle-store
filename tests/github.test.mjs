@@ -17,6 +17,6 @@ test('la signature Java et les règles de téléchargement natives sont vérifi�
  }finally{assert.equal(path.dirname(path.resolve(tmp)),temporaryRoot);assert.ok(path.basename(tmp).startsWith('native-policy-'));fs.rmSync(tmp,{recursive:true,force:true});}});
 
 test('les applications externes sont signées séparément et restent hébergées chez leurs auteurs',()=>{
- assert.equal(catalog.externalApps.length,4);assert.ok(catalog.externalApps.every(a=>a.external&&a.author));assert.ok(catalog.apps.every(a=>!a.external));
+ assert.deepEqual(catalog.externalApps,JSON.parse(fs.readFileSync(path.join(root,"external-catalog.json"),"utf8")).apps);assert.ok(catalog.externalApps.every(a=>a.external&&a.author));assert.ok(catalog.apps.every(a=>!a.external));
  for(const app of catalog.externalApps){assert.ok(app.release.downloadUrl.startsWith(app.sourceUrl+'/releases/download/'));assert.ok(!prepared.manifest.releases.some(r=>r.sha256===app.release.sha256));assert.ok(app.popularity.githubStars>1000);}
 });

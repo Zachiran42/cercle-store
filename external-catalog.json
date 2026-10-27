@@ -132,6 +132,240 @@
         "publishedAt": 1792963403000
       },
       "releaseUrl": "https://github.com/gsantner/markor/releases/tag/v2026.10.0"
+    },
+    {
+      "id": "external-org.breezyweather",
+      "packageName": "org.breezyweather",
+      "name": "Breezy Weather",
+      "description": "Consultez les prévisions, graphiques et alertes météo. La ville peut être choisie manuellement ; les fournisseurs météo reçoivent la position consultée.",
+      "category": "Météo",
+      "license": "LGPL-3.0",
+      "sourceUrl": "https://github.com/breezy-weather/breezy-weather",
+      "external": true,
+      "author": "Équipe Breezy Weather",
+      "popularity": {
+        "githubStars": 11821,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "org.breezyweather",
+        "versionCode": 60202,
+        "versionName": "6.2.2",
+        "name": "Breezy Weather",
+        "minSdk": 23,
+        "signers": [
+          "29d435f70aa9aec3c1faff7f7ffa6e15785088d87f06ecfcab9c3cc62dc269d8"
+        ],
+        "sha256": "20a33a588e884257ab9329fee794d30a9d15ea067f64302c70c69c9adc3c6309",
+        "size": 21755054,
+        "id": "breezy-weather/breezy-weather@v6.2.2",
+        "downloadUrl": "https://github.com/breezy-weather/breezy-weather/releases/download/v6.2.2/breezy-weather-v6.2.2_standard.apk",
+        "assetId": 525949589,
+        "assetName": "breezy-weather-v6.2.2_standard.apk",
+        "publishedAt": 1787473482000
+      },
+      "releaseUrl": "https://github.com/breezy-weather/breezy-weather/releases/tag/v6.2.2",
+      "review": {
+        "date": "2026-10-27",
+        "version": "6.2.2",
+        "sourceCommit": "17fd71dd00e0668368c9c7844433f79f09ad9e93",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
+    },
+    {
+      "id": "external-com.ichi2.anki",
+      "packageName": "com.ichi2.anki",
+      "name": "AnkiDroid",
+      "description": "Révisez avec des cartes mémoire et la répétition espacée : langues, examens et connaissances. Synchronisation AnkiWeb facultative.",
+      "category": "Apprentissage",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/ankidroid/Anki-Android",
+      "external": true,
+      "author": "Équipe AnkiDroid et ses contributeurs",
+      "popularity": {
+        "githubStars": 12101,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.ichi2.anki",
+        "versionCode": 22503300,
+        "versionName": "2.25.3",
+        "name": "AnkiDroid",
+        "minSdk": 24,
+        "signers": [
+          "2071534f0f4b5e54ae952dd275d70da6e3459ee69909d2ab1b4843c4c5b21a45"
+        ],
+        "sha256": "cccf84acc2187eb710614538b80d12d8692f5411dc1b8bfaf0ac08005a84f665",
+        "size": 111759228,
+        "id": "ankidroid/Anki-Android@v2.25.3",
+        "downloadUrl": "https://github.com/ankidroid/Anki-Android/releases/download/v2.25.3/AnkiDroid-2.25.3-full-universal.apk",
+        "assetId": 650785378,
+        "assetName": "AnkiDroid-2.25.3-full-universal.apk",
+        "publishedAt": 1792251253000
+      },
+      "releaseUrl": "https://github.com/ankidroid/Anki-Android/releases/tag/v2.25.3",
+      "review": {
+        "date": "2026-10-27",
+        "version": "2.25.3",
+        "sourceCommit": "d9bf072f814a0c37d30a694192593b31ff2df875",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
+    },
+    {
+      "id": "external-com.kunzisoft.keepass.libre",
+      "packageName": "com.kunzisoft.keepass.libre",
+      "name": "KeePassDX",
+      "description": "Gérez vos mots de passe dans un fichier coffre KeePass. Variante Libre, sans permission Internet dans cet APK. Conservez une sauvegarde de votre coffre.",
+      "category": "Mots de passe",
+      "license": "GPL-3.0",
+      "sourceUrl": "https://github.com/Kunzisoft/KeePassDX",
+      "external": true,
+      "author": "Kunzisoft et les contributeurs KeePassDX",
+      "popularity": {
+        "githubStars": 7550,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.kunzisoft.keepass.libre",
+        "versionCode": 45600,
+        "versionName": "4.5.6",
+        "name": "KeePassDX",
+        "minSdk": 19,
+        "signers": [
+          "7d55b8af210381aabf960f07e17cf7857b6d2a642ca2da6bf0bdf1b200362f04"
+        ],
+        "sha256": "a77b42f52de4adf2e74e88b0948ef2a681a064a3dbab24e5ff0869a091dbe581",
+        "size": 16771674,
+        "id": "Kunzisoft/KeePassDX@4.5.6",
+        "downloadUrl": "https://github.com/Kunzisoft/KeePassDX/releases/download/4.5.6/KeePassDX-4.5.6-libre.apk",
+        "assetId": 651570708,
+        "assetName": "KeePassDX-4.5.6-libre.apk",
+        "publishedAt": 1792270439000
+      },
+      "releaseUrl": "https://github.com/Kunzisoft/KeePassDX/releases/tag/4.5.6",
+      "review": {
+        "date": "2026-10-27",
+        "version": "4.5.6",
+        "sourceCommit": "b5cb8057786fb7e638b79735d1e21e35ca5a21f9",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
+    },
+    {
+      "id": "external-app.organicmaps.web",
+      "packageName": "app.organicmaps.web",
+      "name": "Organic Maps",
+      "description": "Téléchargez des cartes pour les consulter et naviguer hors ligne, à pied, à vélo ou en voiture. Les cartes occupent de la place sur le téléphone.",
+      "category": "Cartes et navigation",
+      "license": "Apache-2.0 ; cartes et données sous leurs licences propres",
+      "sourceUrl": "https://github.com/organicmaps/organicmaps",
+      "external": true,
+      "author": "Organic Maps Project",
+      "popularity": {
+        "githubStars": 15790,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "app.organicmaps.web",
+        "versionCode": 26092932,
+        "versionName": "2026.09.29-32-Web",
+        "name": "Organic Maps",
+        "minSdk": 21,
+        "signers": [
+          "b9c7ae79a5a90270df08a132e536b9c666f5bef1f59b304fcecf8687865e4b5b"
+        ],
+        "sha256": "d7dbdfc3cbfdbcce6d437f11147f2cd15384c03052d2b4594fd8c1c7777dd497",
+        "size": 63888223,
+        "id": "organicmaps/organicmaps@2026.09.29-32-android",
+        "downloadUrl": "https://github.com/organicmaps/organicmaps/releases/download/2026.09.29-32-android/OrganicMaps-26092932-web-release.apk",
+        "assetId": 599243004,
+        "assetName": "OrganicMaps-26092932-web-release.apk",
+        "publishedAt": 1790716606000
+      },
+      "releaseUrl": "https://github.com/organicmaps/organicmaps/releases/tag/2026.09.29-32-android",
+      "review": {
+        "date": "2026-10-27",
+        "version": "2026.09.29-32-Web",
+        "sourceCommit": "b20d1417eef1e3c63a447ac8658db4307a066024",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
+    },
+    {
+      "id": "external-com.brouken.player",
+      "packageName": "com.brouken.player",
+      "name": "Just Player",
+      "description": "Un lecteur vidéo simple pour vos fichiers et vos flux réseau, avec prise en charge des sous-titres et du mode image dans l’image.",
+      "category": "Lecteur vidéo",
+      "license": "Unlicense",
+      "sourceUrl": "https://github.com/moneytoo/Player",
+      "external": true,
+      "author": "moneytoo et les contributeurs Just Player",
+      "popularity": {
+        "githubStars": 2751,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.brouken.player",
+        "versionCode": 217,
+        "versionName": "0.217",
+        "name": "Just Player",
+        "minSdk": 23,
+        "signers": [
+          "3cb97dba57d3d0bc190bae5f1f3a841643bcd9399bc31028ce25775d93d0109d"
+        ],
+        "sha256": "f85156d4748c6263a6af0b13682fb54fbe1dd12a1ed1e8fa3710def548259b74",
+        "size": 51778873,
+        "id": "moneytoo/Player@v0.217",
+        "downloadUrl": "https://github.com/moneytoo/Player/releases/download/v0.217/Just.Player.v0.217.apk",
+        "assetId": 557961277,
+        "assetName": "Just.Player.v0.217.apk",
+        "publishedAt": 1789160510000
+      },
+      "releaseUrl": "https://github.com/moneytoo/Player/releases/tag/v0.217",
+      "review": {
+        "date": "2026-10-27",
+        "version": "0.217",
+        "sourceCommit": "aa85148f6ccbfdf931fe207bb75ec77c478d8eb0",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
+    },
+    {
+      "id": "external-com.unciv.app",
+      "packageName": "com.unciv.app",
+      "name": "Unciv",
+      "description": "Développez votre civilisation dans un jeu de stratégie au tour par tour. Les mods optionnels sont fournis par leurs propres auteurs.",
+      "category": "Jeux de stratégie",
+      "license": "MPL-2.0",
+      "sourceUrl": "https://github.com/yairm210/Unciv",
+      "external": true,
+      "author": "Équipe Unciv et ses contributeurs",
+      "popularity": {
+        "githubStars": 11494,
+        "checkedAt": "2026-10-27"
+      },
+      "release": {
+        "packageName": "com.unciv.app",
+        "versionCode": 1278,
+        "versionName": "4.22.14-patch1",
+        "name": "Unciv",
+        "minSdk": 21,
+        "signers": [
+          "7d6e6bea768161c3d8da8b3fb00def5377effe65dc7268482f8f779bb4fc6e2e"
+        ],
+        "sha256": "cdc2762f17a4ccbb0d950b018224baab4961483507e97c74dd4c9903f7fd87e4",
+        "size": 27556129,
+        "id": "yairm210/Unciv@4.22.14-patch1",
+        "downloadUrl": "https://github.com/yairm210/Unciv/releases/download/4.22.14-patch1/Unciv-signed.apk",
+        "assetId": 676970427,
+        "assetName": "Unciv-signed.apk",
+        "publishedAt": 1792987843000
+      },
+      "releaseUrl": "https://github.com/yairm210/Unciv/releases/tag/4.22.14-patch1",
+      "review": {
+        "date": "2026-10-27",
+        "version": "4.22.14-patch1",
+        "sourceCommit": "77b0939c36d99e8e1e2d4ed69c95018a3f115b84",
+        "scope": "Revue statique ciblée et contrôle de l’APK ; aucun audit exhaustif ni essai sur téléphone."
+      }
     }
   ]
 }

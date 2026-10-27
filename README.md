@@ -21,6 +21,14 @@ Les filtres **Créations du Cercle** et **Applications externes**, puis les cat�
 - **Aegis Authenticator 3.4.3** — Sécurité ; Beem Development. [GPL-3.0](https://github.com/beemdevelopment/Aegis). 13 401 étoiles GitHub relevées le 2026-10-27.
 - **Fossify Gallery 1.14.1** — Photos ; Fossify. [GPL-3.0](https://github.com/FossifyOrg/Gallery). 3 854 étoiles GitHub relevées le 2026-10-27.
 - **Markor 2026.10.0** — Notes et listes ; Gregor Santner et les contributeurs Markor. [Apache-2.0 ; traductions et exemples CC0-1.0](https://github.com/gsantner/markor). 6 338 étoiles GitHub relevées le 2026-10-27.
+- **Breezy Weather 6.2.2** — Météo ; Équipe Breezy Weather. [LGPL-3.0](https://github.com/breezy-weather/breezy-weather). 11 821 étoiles GitHub relevées le 2026-10-27.
+- **AnkiDroid 2.25.3** — Apprentissage ; Équipe AnkiDroid et ses contributeurs. [GPL-3.0](https://github.com/ankidroid/Anki-Android). 12 101 étoiles GitHub relevées le 2026-10-27.
+- **KeePassDX 4.5.6** — Mots de passe ; Kunzisoft et les contributeurs KeePassDX. [GPL-3.0](https://github.com/Kunzisoft/KeePassDX). 7 550 étoiles GitHub relevées le 2026-10-27.
+- **Organic Maps 2026.09.29-32-Web** — Cartes et navigation ; Organic Maps Project. [Apache-2.0 ; cartes et données sous leurs licences propres](https://github.com/organicmaps/organicmaps). 15 790 étoiles GitHub relevées le 2026-10-27.
+- **Just Player 0.217** — Lecteur vidéo ; moneytoo et les contributeurs Just Player. [Unlicense](https://github.com/moneytoo/Player). 2 751 étoiles GitHub relevées le 2026-10-27.
+- **Unciv 4.22.14-patch1** — Jeux de stratégie ; Équipe Unciv et ses contributeurs. [MPL-2.0](https://github.com/yairm210/Unciv). 11 494 étoiles GitHub relevées le 2026-10-27.
+
+Une revue ciblée de dix projets supplémentaires a retenu six nouvelles versions et en a différé quatre. [Rapport, limites et motifs](REVUE-APPLICATIONS-EXTERNES.md) · [Versions et empreintes examinées](external-reviews.json). Avec Cercle 0.3.4, il suffit d’actualiser le catalogue ; aucun nouvel APK Cercle n’est nécessaire pour ces fiches.
 
 Les étoiles sont un indicateur de popularité, pas une note sur cinq ni une garantie de qualité ou de sécurité. La sélection retient des projets publics non archivés, avec une publication stable, une licence identifiée et un APK officiel autonome. Les APK référencés ont été téléchargés et contrôlés avec apksigner et aapt : paquet, version, taille, empreinte et certificat. Les fichiers restent sur les Releases des auteurs et sont téléchargés directement chez eux ; ils ne sont ni recompilés ni copiés dans les Releases de Cercle. Aucun essai de ces applications sur téléphone n’a été effectué ici.
 

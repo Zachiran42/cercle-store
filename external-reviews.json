@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "date": "2026-10-27",
+  "scope": "Revue statique ciblée, manifeste et dépendances Maven identifiables ; APK, empreinte et signature. Pas de reconstruction reproductible, audit cryptographique exhaustif, test dynamique ou garantie d’absence de vulnérabilités.",
+  "dependencyQueries": 392,
+  "reviews": [
+    {
+      "repository": "TeamNewPipe/NewPipe",
+      "name": "NewPipe",
+      "version": "0.29.1",
+      "decision": "deferred",
+      "date": "2026-10-27",
+      "sourceCommit": "00acf2f318b0af7ffacbd687bba011b642cc01d0",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "18447bfb1e06d113edc88df93f471827280de06f6f3d4dc42f56f28b9c1bab79",
+      "signers": [
+        "cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
+      ],
+      "alerts": [
+        {
+          "id": "GHSA-65r4-943x-97jj",
+          "dependency": "org.jsoup:jsoup",
+          "version": "1.22.2",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-65r4-943x-97jj"
+        },
+        {
+          "id": "GHSA-pmhh-3w7g-xqp8",
+          "dependency": "org.jsoup:jsoup",
+          "version": "1.22.2",
+          "severity": "MODERATE",
+          "url": "https://github.com/advisories/GHSA-pmhh-3w7g-xqp8"
+        }
+      ]
+    },
+    {
+      "repository": "breezy-weather/breezy-weather",
+      "name": "Breezy Weather",
+      "version": "6.2.2",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "17fd71dd00e0668368c9c7844433f79f09ad9e93",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "20a33a588e884257ab9329fee794d30a9d15ea067f64302c70c69c9adc3c6309",
+      "signers": [
+        "29d435f70aa9aec3c1faff7f7ffa6e15785088d87f06ecfcab9c3cc62dc269d8"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "ankidroid/Anki-Android",
+      "name": "AnkiDroid",
+      "version": "2.25.3",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "d9bf072f814a0c37d30a694192593b31ff2df875",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "cccf84acc2187eb710614538b80d12d8692f5411dc1b8bfaf0ac08005a84f665",
+      "signers": [
+        "2071534f0f4b5e54ae952dd275d70da6e3459ee69909d2ab1b4843c4c5b21a45"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "Kunzisoft/KeePassDX",
+      "name": "KeePassDX",
+      "version": "4.5.6",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "b5cb8057786fb7e638b79735d1e21e35ca5a21f9",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "a77b42f52de4adf2e74e88b0948ef2a681a064a3dbab24e5ff0869a091dbe581",
+      "signers": [
+        "7d55b8af210381aabf960f07e17cf7857b6d2a642ca2da6bf0bdf1b200362f04"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "organicmaps/organicmaps",
+      "name": "Organic Maps",
+      "version": "2026.09.29-32-Web",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "b20d1417eef1e3c63a447ac8658db4307a066024",
+      "sourceScope": "selected Android/network/storage/build files",
+      "apkSha256": "d7dbdfc3cbfdbcce6d437f11147f2cd15384c03052d2b4594fd8c1c7777dd497",
+      "signers": [
+        "b9c7ae79a5a90270df08a132e536b9c666f5bef1f59b304fcecf8687865e4b5b"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "moneytoo/Player",
+      "name": "Just Player",
+      "version": "0.217",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "aa85148f6ccbfdf931fe207bb75ec77c478d8eb0",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "f85156d4748c6263a6af0b13682fb54fbe1dd12a1ed1e8fa3710def548259b74",
+      "signers": [
+        "3cb97dba57d3d0bc190bae5f1f3a841643bcd9399bc31028ce25775d93d0109d"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "M66B/FairEmail",
+      "name": "FairEmail",
+      "version": "1.2339",
+      "decision": "deferred",
+      "date": "2026-10-27",
+      "sourceCommit": "8f486274b273389d5a6c2db28015f84fc34180aa",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "afce59935698c96d2071667858c8e401f177dc6b46ada41e12dde40aa04f351c",
+      "signers": [
+        "e02067249f5a350e0ec703fe9df4dd682e0291a09f0c2e041050bbe7c064f5c9"
+      ],
+      "alerts": [
+        {
+          "id": "GHSA-xxph-c9ww-hj94",
+          "dependency": "com.google.guava:guava",
+          "version": "33.1.0-android",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-xxph-c9ww-hj94"
+        },
+        {
+          "id": "GHSA-65r4-943x-97jj",
+          "dependency": "org.jsoup:jsoup",
+          "version": "1.23.1",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-65r4-943x-97jj"
+        },
+        {
+          "id": "GHSA-mqvp-7rrg-9jxc",
+          "dependency": "org.apache.poi:poi-scratchpad",
+          "version": "3.17",
+          "severity": "MODERATE",
+          "url": "https://github.com/advisories/GHSA-mqvp-7rrg-9jxc"
+        }
+      ]
+    },
+    {
+      "repository": "iSoron/uhabits",
+      "name": "Loop Habit Tracker",
+      "version": "2.3.2",
+      "decision": "deferred",
+      "date": "2026-10-27",
+      "sourceCommit": "7afc799cfb6959f8a9d892417d6427a262bfb13a",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "7090577c85180109b218add5faceaf29344666045df51728abbdff219acbc112",
+      "signers": [
+        "b2f2fa6f868b1e0aa03fb8084fbc1b0ffc353d9cf9826c8b40cfff0ed0804b0a"
+      ],
+      "alerts": [
+        {
+          "id": "GHSA-gwrp-pvrq-jmwv",
+          "dependency": "org.apache.commons:commons-io",
+          "version": "1.3.2",
+          "severity": "MODERATE",
+          "url": "https://github.com/advisories/GHSA-gwrp-pvrq-jmwv"
+        },
+        {
+          "id": "GHSA-j288-q9x7-2f5v",
+          "dependency": "org.apache.commons:commons-lang3",
+          "version": "3.14.0",
+          "severity": "MODERATE",
+          "url": "https://github.com/advisories/GHSA-j288-q9x7-2f5v"
+        },
+        {
+          "id": "GHSA-xxph-c9ww-hj94",
+          "dependency": "com.google.guava:guava",
+          "version": "33.2.1-android",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-xxph-c9ww-hj94"
+        }
+      ]
+    },
+    {
+      "repository": "yairm210/Unciv",
+      "name": "Unciv",
+      "version": "4.22.14-patch1",
+      "decision": "retained",
+      "date": "2026-10-27",
+      "sourceCommit": "77b0939c36d99e8e1e2d4ed69c95018a3f115b84",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "cdc2762f17a4ccbb0d950b018224baab4961483507e97c74dd4c9903f7fd87e4",
+      "signers": [
+        "7d6e6bea768161c3d8da8b3fb00def5377effe65dc7268482f8f779bb4fc6e2e"
+      ],
+      "alerts": []
+    },
+    {
+      "repository": "00-Evan/shattered-pixel-dungeon",
+      "name": "Shattered Pixel Dungeon",
+      "version": "4.0.2",
+      "decision": "deferred",
+      "date": "2026-10-27",
+      "sourceCommit": "57a4e06a4caf162446d1c28caa7983f0493fecf0",
+      "sourceScope": "targeted review of release-source snapshot",
+      "apkSha256": "ceef4cdd4beddcb3d85379ac004cb4ab5d918b89dc7366b4ce9c4a3585a5e78e",
+      "signers": [
+        "d45f760b89608b4b253a3b160dc2707f1ff4e8dd8ca4d2e8e1b81c2c72d81753"
+      ],
+      "alerts": [
+        {
+          "id": "GHSA-3vqj-43w4-2q58",
+          "dependency": "org.json:json",
+          "version": "20170516",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-3vqj-43w4-2q58"
+        },
+        {
+          "id": "GHSA-4jq9-2xhw-jpx7",
+          "dependency": "org.json:json",
+          "version": "20170516",
+          "severity": "HIGH",
+          "url": "https://github.com/advisories/GHSA-4jq9-2xhw-jpx7"
+        }
+      ]
+    }
+  ]
+}
