@@ -9,9 +9,21 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 27 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue du Cercle : Lisière Compact 1.5.0, Noël Sucré 1.2.0 et Boucle 1.1.0 sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- Catalogue du Cercle : Lisière Compact 1.5.0, Noël Sucré 1.2.0, Boucle 1.1.1, Dernière Luciole 1.0.0, Mine Express 1.0.0, Donjon de poche 1.0.0, Gare en panique 1.0.0 et Dernier Robot 1.0.0, sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
 - APK **0.3.4 de test**, versionCode 9, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
+
+## Jeux ajoutés le 28 octobre 2026
+
+- [Dernière Luciole](https://github.com/Zachiran42/derniere-luciole) — Rallumez les lanternes de 20 clairières en choisissant votre chemin avant que votre lumière ne s’épuise. Un jeu de réflexion hors ligne, sans compte ni publicité.
+- [Mine Express](https://github.com/Zachiran42/mine-express) — Explorez les mines, récoltez des minerais et retournez au camp avant de manquer d’oxygène. Améliorez votre équipement au fil des expéditions. Jeu hors ligne, sans compte ni publicité.
+- [Donjon de poche](https://github.com/Zachiran42/donjon-de-poche) — Explorez un donjon au tour par tour : affrontez les monstres, récupérez les trésors et gérez vos potions pour atteindre les étages suivants. Jeu hors ligne, sans compte ni publicité.
+- [Gare en panique](https://github.com/Zachiran42/gare-en-panique) — Changez les aiguillages pour guider les trains vers les quais de leur couleur. Anticipez leurs trajets et évitez les collisions. Jeu hors ligne, sans compte ni publicité.
+- [Dernier Robot](https://github.com/Zachiran42/dernier-robot) — Survivez pendant 90 secondes dans une arène avec des tirs automatiques. Ramassez les fragments et choisissez vos améliorations. Jeu hors ligne, sans compte ni publicité.
+
+Ces cinq jeux sont publiés en version 1.0.0 de test, Android 7.0 minimum avec Android System WebView à jour. Les APK originaux sont conservés : empreintes SHA-256, identifiants, versions et signatures vérifiés ; aucune permission Android demandée. Le contenu web embarqué correspond aux sources figées examinées. Les APK utilisent une clé de développement ; conservez-la pour les futures mises à jour. Aucun essai sur téléphone ni audit exhaustif effectué ici. La licence MIT de chaque jeu accompagne son APK dans sa publication Cercle.
+
+Pour le suivi direct des futures versions, publiez un APK dans une GitHub Release stable du dépôt du jeu, avec le même identifiant, la même clé et un versionCode supérieur. À ce jour, ces cinq dépôts proposent leurs APK dans docs/downloads, sans GitHub Release. Une mise à jour peut aussi être importée puis republiée dans le catalogue signé de Cercle.
 
 ## Catalogues externes — version 0.3.4
 
