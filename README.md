@@ -9,7 +9,7 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 - Dépôt public : **Zachiran42/cercle-store**.
 - Catalogue en ligne : **https://zachiran42.github.io/cercle-store/**.
 - Publication effectuée et vérifiée le 27 octobre 2026 : site HTTPS, catalogue signé et téléchargement public de l’APK. Le rapport VALIDATION.md détaille les vérifications.
-- Catalogue du Cercle : Lisière Compact 1.5.0, Noël Sucré 1.2.0, Boucle 1.1.1, Dernière Luciole 1.0.0, Mine Express 1.0.0, Donjon de poche 1.0.0, Gare en panique 1.0.0 et Dernier Robot 1.0.0, sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
+- Catalogue du Cercle : Lisière Compact 1.5.0, Noël Sucré 1.2.0, Boucle 1.1.1, Dernière Luciole 1.0.0, Mine Express 1.0.0, Donjon de poche 1.0.0, Gare en panique 1.0.0 et Dernier Robot 1.0.0, ainsi que Le Dernier Convoi 0.2.0, sous licence MIT. L’APK du store est inclus pour son installation et ses futures mises à jour.
 - APK **0.3.4 de test**, versionCode 9, signé avec la même clé locale que la première version de test. Une installation par-dessus celle-ci conserve donc son identité de signature.
 - Le rendu et les confirmations natives restent à valider sur un téléphone. Les exemples du mode Aperçu ne sont pas des applications publiées.
 
@@ -24,6 +24,14 @@ Votre ordinateur n'est nécessaire que pour préparer et publier des application
 Ces cinq jeux sont publiés en version 1.0.0 de test, Android 7.0 minimum avec Android System WebView à jour. Les APK originaux sont conservés : empreintes SHA-256, identifiants, versions et signatures vérifiés ; aucune permission Android demandée. Le contenu web embarqué correspond aux sources figées examinées. Les APK utilisent une clé de développement ; conservez-la pour les futures mises à jour. Aucun essai sur téléphone ni audit exhaustif effectué ici. La licence MIT de chaque jeu accompagne son APK dans sa publication Cercle.
 
 Pour le suivi direct des futures versions, publiez un APK dans une GitHub Release stable du dépôt du jeu, avec le même identifiant, la même clé et un versionCode supérieur. À ce jour, ces cinq dépôts proposent leurs APK dans docs/downloads, sans GitHub Release. Une mise à jour peut aussi être importée puis republiée dans le catalogue signé de Cercle.
+
+## Le Dernier Convoi — ajout du 29 octobre 2026
+
+[Le Dernier Convoi](https://github.com/Zachiran42/le-dernier-convoi) rejoint la catégorie Jeux en version **0.2.0**, versionCode 2 : cinq régions, quarante étapes, cinq gardiens et un train-refuge à aménager. Jeu solo hors ligne, sans compte ni publicité, avec sauvegarde locale.
+
+Cet APK de développement est destiné aux téléphones **ARM64, Android 7.0 minimum**. Son empreinte correspond au fichier fourni dans la Release v0.2.0 ; signature, paquet, version et absence de permission Internet contrôlés. Les textes MIT du jeu, du moteur Godot et ses mentions tierces sont inclus dans l’APK. Le fichier est conservé sans modification. Aucun essai sur téléphone ni audit exhaustif effectué ici. Les prochaines GitHub Releases stables du dépôt pourront être recherchées par Cercle.
+
+Organic Maps reste présent une seule fois dans les applications externes, sous son auteur et avec le téléchargement depuis son dépôt officiel ; la dernière publication Android vérifiée demeure 2026.09.29-32-Web.
 
 ## Catalogues externes — version 0.3.4
 
