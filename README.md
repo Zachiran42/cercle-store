@@ -35,6 +35,14 @@ Cet APK de développement est destiné aux téléphones **ARM64, Android 7.0 min
 
 Organic Maps reste présent une seule fois dans les applications externes, sous son auteur et avec le téléchargement depuis son dépôt officiel ; la dernière publication Android vérifiée demeure 2026.09.29-32-Web.
 
+## Ricochet, Aplomb et Frein — ajout du 30 octobre 2026
+
+- [Ricochet](https://github.com/Zachiran42/ricochet) : trois tirs et des rebonds pour multiplier les points.
+- [Aplomb](https://github.com/Zachiran42/aplomb) : empiler huit pièces en gardant l’équilibre.
+- [Frein](https://github.com/Zachiran42/frein) : ralentir un palet pour atteindre une zone cible.
+
+Trois prototypes Android natifs en version 0.1.0, Android 8 minimum, sous licence MIT. APK universels hors ligne, sans permission ni publicité, avec record local et pause. Paquets, versions, signatures et empreintes SHA-256 vérifiés ; APK originaux conservés sans modification. Les licences accompagnent les APK publiés. Aucun essai sur téléphone ni audit exhaustif effectué ici. Les futures Releases stables de leurs dépôts seront recherchées directement par Cercle.
+
 ## Catalogues externes — version 0.3.4
 
 Les filtres **Créations du Cercle** et **Applications externes**, puis les catégories thématiques, permettent de choisir le catalogue à explorer. Les applications externes portent la mention **Application externe — non créée par Cercle** avec leur auteur, sur Android et sur le site.
