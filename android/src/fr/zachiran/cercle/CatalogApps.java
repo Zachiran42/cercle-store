@@ -17,10 +17,14 @@ final class CatalogApps {
   if(!source.equals("https://github.com/"+repo))throw new IOException("Le dépôt officiel est invalide.");
   GitHubSourcePolicy.download(app.getJSONObject("release").getString("downloadUrl"),repo);return repo;
  }
+ static String category(JSONObject app){String value=app.optString("category","").trim();return value.isEmpty()?"Pratique":value;}
+ static java.util.List<String> categories(JSONArray apps,String storePackage){java.util.LinkedHashSet<String> found=new java.util.LinkedHashSet<>();for(int i=0;i<apps.length();i++){JSONObject app=apps.optJSONObject(i);if(app!=null&&!storePackage.equals(app.optString("packageName")))found.add(category(app));}java.util.List<String> result=new java.util.ArrayList<>();result.add("Tout");for(String name:new String[]{"Jeux","Pratique","Maison","Cuisine","Loisirs","Documents","Cartes et navigation"})if(found.remove(name))result.add(name);java.util.List<String> other=new java.util.ArrayList<>(found);java.util.Collections.sort(other,java.text.Collator.getInstance(java.util.Locale.FRENCH));result.addAll(other);return result;}
+ static int count(JSONArray apps,String category,String origin,String storePackage){int count=0;for(int i=0;i<apps.length();i++){JSONObject app=apps.optJSONObject(i);if(app!=null&&!storePackage.equals(app.optString("packageName"))&&matches(app,category)&&matches(app,origin))count++;}return count;}
  static boolean matches(JSONObject app,String category){
   if("Tout".equals(category))return true;
   if("Applications externes".equals(category))return app.optBoolean("external");
   if("Créations du Cercle".equals(category))return !app.optBoolean("external")&&!app.optBoolean("personal");
-  return category.equals(app.optString("category"));
+  if("Mes ajouts".equals(category))return app.optBoolean("personal");
+  return category.equals(category(app));
  }
 }

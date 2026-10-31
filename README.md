@@ -184,7 +184,13 @@ Code du store sous licence MIT. Chaque application conserve sa propre licence.
 <!-- cercle-ddl:start -->
 ## APK Android
 
-[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.4/Cercle.apk)
+[📥 Télécharger la dernière version de Cercle.apk](https://github.com/Zachiran42/cercle-store/releases/download/store-v0.3.5/Cercle.apk)
 
-Version actuelle : **0.3.4**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
+Version actuelle : **0.3.5**. Depuis votre téléphone Android, ouvrez le fichier téléchargé pour lancer son installation.
 <!-- cercle-ddl:end -->
+
+
+<!-- category-tabs -->
+## Catégories dans le catalogue
+
+Cercle 0.3.5 ajoute des onglets par catégorie, avec compteurs : Tout, Jeux, Pratique, Maison, Cuisine, Loisirs, Documents et Cartes et navigation. Les catégories sont déduites du catalogue signé ; les nouvelles rubriques apparaissent automatiquement. La recherche se combine avec la catégorie et le filtre d’origine. Sur Android, la catégorie et la recherche restent sélectionnées après une fiche ou une actualisation. Les filtres web sont utilisables au clavier (flèches, Début et Fin).
